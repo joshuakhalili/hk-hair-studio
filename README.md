@@ -6,7 +6,8 @@ Built by **Crescendo**.
 ```
 index.html        launcher — Option A / Option B / compare
 essentials/       Tier 1 · the £200 build. Finished.
-signature/        Tier 2 · the £1,000 build. Holding page.
+signature/        Tier 2 · the £1,000 build. Finished.
+assets/signature.js  Tier 2's menu, booking demo, counters and carousel
 compare/          side-by-side view of both, for the pitch
 assets/img/       11 photographs — the salon's work and the salon
 assets/switch.*   the A/B switcher shared by both tier pages
