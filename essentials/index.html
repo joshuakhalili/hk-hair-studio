@@ -1,0 +1,687 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>HK Hair Studio — Hair Salon &amp; Barbers in Cambridge</title>
+<meta name="description" content="HK Hair Studio, 3 Adkins Corner, Perne Road, Cambridge CB1 3RU. Cuts, colour, fades, extensions and treatments. 4.9★ from 357 verified reviews. Book online 24/7.">
+<meta property="og:title" content="HK Hair Studio — Cambridge">
+<meta property="og:description" content="Hair salon and barbers on Perne Road, Cambridge. 4.9★ from 357 verified reviews.">
+<meta property="og:type" content="website">
+<!-- Demo, not the salon's live site — nothing is signed. Keep this noindex until it
+     is actually theirs, or Google may index it as a second HK Hair Studio site and
+     confuse people searching for the real one. DELETE THIS LINE ON GO-LIVE. -->
+<meta name="robots" content="noindex, nofollow">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/switch.css">
+
+<script>
+/* ============================================================
+   CONFIG — the only block you need to edit.
+   Venue ID 462045, confirmed from the live Treatwell widget.
+   ============================================================ */
+const CONFIG = {
+  TREATWELL_WIDGET_URL:  "https://widget.treatwell.co.uk/place/hk-hair-studio/",
+  TREATWELL_PROFILE_URL: "https://www.treatwell.co.uk/place/hk-hair-studio/",
+  SUPABASE_URL:      "",
+  SUPABASE_ANON_KEY: "",
+  SUPABASE_TABLE:    "enquiries",
+  PHONE:     "01223694812",
+  PHONE_FMT: "01223 694 812",
+  WHATSAPP:  "447747205147",
+  EMAIL:     "hkhairstudio.uk@gmail.com",
+  INSTAGRAM: "https://www.instagram.com/hkhairstudio1",
+  MAPS:      "https://maps.google.com/?q=HK+Hair+Studio,+3+Adkins+Corner,+Perne+Road,+Cambridge+CB1+3RU"
+};
+</script>
+
+<style>
+:root{
+  --ink:#141210; --ink-2:#4a443e; --ink-3:#8a8178;
+  --paper:#f7f4ef; --paper-2:#efeae1; --line:#ddd5c9;
+  --gold:#a8834b; --gold-dk:#8c6a37; --white:#fff;
+  --r:4px; --wrap:1120px;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--paper);color:var(--ink);
+  font-family:Inter,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+  font-size:16px;line-height:1.65;-webkit-font-smoothing:antialiased}
+img{max-width:100%;display:block}
+a{color:inherit}
+h1,h2,h3{font-family:Fraunces,Georgia,serif;font-weight:600;line-height:1.12;margin:0;letter-spacing:-.01em}
+h1{font-size:clamp(2.4rem,7vw,4.4rem)}
+h2{font-size:clamp(1.75rem,4vw,2.6rem)}
+h3{font-size:1.05rem;font-family:Inter,sans-serif;font-weight:600}
+p{margin:0 0 1rem}
+.wrap{max-width:var(--wrap);margin:0 auto;padding:0 24px}
+section{padding:clamp(56px,8vw,104px) 0}
+.eyebrow{font-size:.72rem;letter-spacing:.18em;text-transform:uppercase;color:var(--gold-dk);font-weight:600;margin:0 0 14px}
+.lead{font-size:1.08rem;color:var(--ink-2);max-width:58ch}
+
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:.55em;
+  padding:14px 28px;border-radius:var(--r);border:1px solid transparent;
+  font-size:.95rem;font-weight:600;text-decoration:none;cursor:pointer;
+  transition:background .18s,color .18s,border-color .18s;font-family:inherit}
+.btn-primary{background:var(--ink);color:var(--paper)}
+.btn-primary:hover{background:var(--gold-dk)}
+.btn-ghost{background:transparent;color:var(--ink);border-color:var(--line)}
+.btn-ghost:hover{border-color:var(--ink)}
+.btn-lg{padding:18px 40px;font-size:1.02rem}
+
+header{position:sticky;top:0;z-index:60;background:rgba(247,244,239,.94);
+  backdrop-filter:saturate(160%) blur(10px);border-bottom:1px solid var(--line)}
+.nav{display:flex;align-items:center;justify-content:space-between;height:68px}
+.brand{font-family:Fraunces,serif;font-weight:600;font-size:1.25rem;text-decoration:none}
+.brand span{color:var(--gold-dk)}
+.nav-links{display:none;gap:28px;font-size:.9rem}
+.nav-links a{text-decoration:none;color:var(--ink-2)}
+.nav-links a:hover{color:var(--ink)}
+.nav-cta{display:flex;align-items:center;gap:12px}
+.nav-tel{display:none;font-size:.9rem;text-decoration:none;color:var(--ink-2)}
+@media(min-width:960px){.nav-links{display:flex}.nav-tel{display:inline}}
+
+.hero{padding:clamp(52px,8vw,100px) 0 clamp(48px,7vw,88px)}
+.hero-grid{display:grid;gap:40px;align-items:center}
+@media(min-width:960px){.hero-grid{grid-template-columns:1.05fr .95fr;gap:64px}}
+.hero h1{margin-bottom:20px}
+.hero .lead{margin-bottom:30px}
+.hero-btns{display:flex;flex-wrap:wrap;gap:12px}
+.hero-img{aspect-ratio:3/4;object-fit:cover;border-radius:var(--r);width:100%}
+.stars{display:inline-flex;align-items:center;gap:10px;margin-bottom:22px;
+  padding:8px 16px;background:var(--white);border:1px solid var(--line);
+  border-radius:100px;font-size:.86rem;color:var(--ink-2)}
+.stars b{color:var(--ink);font-weight:600}
+.stars .s{color:var(--gold);letter-spacing:.08em}
+
+.trust{background:var(--paper-2);padding:clamp(36px,5vw,56px) 0}
+.trust-grid{display:grid;gap:20px;grid-template-columns:repeat(2,1fr);text-align:center}
+@media(min-width:760px){.trust-grid{grid-template-columns:repeat(4,1fr)}}
+.trust-n{font-family:Fraunces,serif;font-size:2rem;font-weight:600;line-height:1}
+.trust-l{font-size:.78rem;color:var(--ink-3);letter-spacing:.06em;text-transform:uppercase;margin-top:6px}
+
+#book{background:var(--ink);color:var(--paper)}
+#book .eyebrow{color:var(--gold)}
+#book h2{color:var(--paper);margin-bottom:14px}
+#book p{color:rgba(247,244,239,.66)}
+.book-inner{max-width:780px}
+.book-actions{display:flex;flex-wrap:wrap;gap:12px;margin-top:26px}
+#book .btn-primary{background:var(--gold);color:var(--ink)}
+#book .btn-primary:hover{background:var(--paper)}
+#book .btn-ghost{color:var(--paper);border-color:rgba(247,244,239,.28)}
+#book .btn-ghost:hover{border-color:var(--paper)}
+.widget-shell{display:none;margin-top:34px;background:var(--white);
+  border-radius:var(--r);overflow:hidden;border:1px solid rgba(247,244,239,.2)}
+.widget-shell.open{display:block}
+.widget-bar{display:flex;align-items:center;justify-content:space-between;
+  padding:10px 16px;background:var(--paper-2);border-bottom:1px solid var(--line);
+  font-size:.78rem;color:var(--ink-3)}
+.widget-bar button{background:none;border:0;font:inherit;font-weight:600;color:var(--ink-2);cursor:pointer;padding:4px 8px}
+.widget-shell iframe{width:100%;height:760px;border:0;display:block;background:#fff}
+@media(max-width:700px){.widget-shell iframe{height:620px}}
+
+.svc-head{display:grid;gap:36px;align-items:start}
+@media(min-width:980px){.svc-head{grid-template-columns:1fr 300px}}
+.svc-img{aspect-ratio:3/4;object-fit:cover;border-radius:var(--r);width:100%}
+.tabs{display:flex;flex-wrap:wrap;margin:28px 0 30px;border-bottom:1px solid var(--line)}
+.tab{background:none;border:0;border-bottom:2px solid transparent;
+  padding:12px 4px;margin-right:26px;font:inherit;font-size:.94rem;font-weight:500;
+  color:var(--ink-3);cursor:pointer}
+.tab[aria-selected="true"]{color:var(--ink);border-bottom-color:var(--gold);font-weight:600}
+.panel{display:none}
+.panel.active{display:block}
+.grp{font-family:Fraunces,serif;font-size:1.12rem;font-weight:600;margin:28px 0 2px}
+.grp:first-child{margin-top:0}
+.svc{display:flex;align-items:baseline;gap:16px;padding:13px 0;border-bottom:1px solid var(--line)}
+.svc-name{font-weight:500}
+.svc-dur{font-size:.8rem;color:var(--ink-3);margin-top:2px}
+.svc-dot{flex:1;border-bottom:1px dotted var(--line);transform:translateY(-4px)}
+.svc-price{font-family:Fraunces,serif;font-size:1.1rem;font-weight:600;white-space:nowrap}
+.svc-note{font-size:.86rem;color:var(--ink-3);margin-top:20px}
+.svc-cols{display:grid;gap:0 52px}
+@media(min-width:900px){.svc-cols{grid-template-columns:1fr 1fr}}
+
+#work{background:var(--paper-2)}
+.work-grid{display:grid;gap:16px;grid-template-columns:repeat(2,1fr);margin-top:34px}
+@media(min-width:860px){.work-grid{grid-template-columns:repeat(3,1fr)}}
+.work figure{margin:0}
+.work img{aspect-ratio:3/4;object-fit:cover;border-radius:var(--r);width:100%}
+.work img.land{aspect-ratio:3/4;object-position:center 30%}
+.work figcaption{font-size:.84rem;color:var(--ink-3);margin-top:9px;line-height:1.45}
+
+.gal{display:grid;gap:14px;grid-template-columns:repeat(2,1fr);margin-top:32px}
+@media(min-width:760px){.gal{grid-template-columns:repeat(4,1fr)}}
+.gal img{aspect-ratio:3/2;object-fit:cover;border-radius:var(--r)}
+
+#team{background:var(--paper-2)}
+.team-grid{display:grid;gap:18px;grid-template-columns:repeat(2,1fr);margin-top:34px}
+@media(min-width:760px){.team-grid{grid-template-columns:repeat(4,1fr)}}
+.member{background:var(--white);border:1px solid var(--line);border-radius:var(--r);padding:20px}
+.member h3{margin-bottom:2px}
+.member .role{font-size:.82rem;color:var(--ink-3)}
+.member .rate{font-size:.82rem;color:var(--gold-dk);margin-top:8px}
+
+.know-grid{display:grid;gap:26px;margin-top:34px}
+@media(min-width:760px){.know-grid{grid-template-columns:repeat(4,1fr)}}
+.know h3{margin-bottom:6px}
+.know p{font-size:.9rem;color:var(--ink-2);margin:0}
+
+#reviews{background:var(--ink);color:var(--paper)}
+#reviews .eyebrow{color:var(--gold)}
+#reviews h2{color:var(--paper)}
+.rev-grid{display:grid;gap:20px;margin-top:34px}
+@media(min-width:860px){.rev-grid{grid-template-columns:repeat(3,1fr)}}
+.rev{border:1px solid rgba(247,244,239,.2);border-radius:var(--r);padding:24px}
+.rev .s{color:var(--gold);letter-spacing:.08em;font-size:.9rem}
+.rev p{margin:12px 0 14px;color:rgba(247,244,239,.86);font-size:.95rem}
+.rev .who{font-size:.82rem;color:rgba(247,244,239,.5)}
+
+.visit-grid{display:grid;gap:44px;margin-top:36px}
+@media(min-width:860px){.visit-grid{grid-template-columns:1fr 1fr;gap:64px}}
+.hours{width:100%;border-collapse:collapse}
+.hours td{padding:11px 0;border-bottom:1px solid var(--line);font-size:.95rem}
+.hours td:last-child{text-align:right;color:var(--ink-2)}
+.hours tr.today td{font-weight:600;color:var(--ink)}
+.hours tr.today td:first-child::after{content:"Today";margin-left:10px;font-size:.66rem;
+  letter-spacing:.12em;text-transform:uppercase;color:var(--gold-dk);font-weight:600}
+.detail{margin-bottom:20px}
+.detail dt{font-size:.72rem;letter-spacing:.16em;text-transform:uppercase;color:var(--ink-3);margin-bottom:5px;font-weight:600}
+.detail dd{margin:0;font-size:1rem}
+.detail dd a{text-decoration:none;border-bottom:1px solid var(--line)}
+.detail dd a:hover{border-color:var(--ink)}
+
+#enquire{background:var(--paper-2)}
+.form{max-width:620px;margin-top:30px}
+.field{margin-bottom:16px}
+.field label{display:block;font-size:.78rem;letter-spacing:.1em;text-transform:uppercase;
+  margin-bottom:7px;color:var(--ink-3);font-weight:600}
+.field input,.field select,.field textarea{width:100%;padding:13px 15px;
+  background:var(--white);border:1px solid var(--line);
+  border-radius:var(--r);color:var(--ink);font:inherit;font-size:.95rem}
+.field input:focus,.field textarea:focus,.field select:focus{outline:0;border-color:var(--gold)}
+.field textarea{min-height:110px;resize:vertical}
+.row2{display:grid;gap:16px}
+@media(min-width:600px){.row2{grid-template-columns:1fr 1fr}}
+.form-msg{margin-top:14px;font-size:.92rem;min-height:1.4em}
+.form-msg.ok{color:#2f7d3c}
+.form-msg.err{color:#a33}
+
+footer{background:#0e0c0b;color:rgba(247,244,239,.55);padding:52px 0 40px;font-size:.88rem}
+.foot-grid{display:grid;gap:30px}
+@media(min-width:760px){.foot-grid{grid-template-columns:2fr 1fr 1fr}}
+footer .brand{color:var(--paper);display:inline-block;margin-bottom:10px}
+footer a{color:rgba(247,244,239,.55);text-decoration:none}
+footer a:hover{color:var(--paper)}
+.foot-h{font-size:.72rem;letter-spacing:.16em;text-transform:uppercase;
+  color:rgba(247,244,239,.4);margin-bottom:12px;font-weight:600}
+.foot-list{list-style:none;margin:0;padding:0}
+.foot-list li{margin-bottom:7px}
+.foot-bot{margin-top:40px;padding-top:22px;border-top:1px solid rgba(247,244,239,.12);
+  display:flex;flex-wrap:wrap;gap:12px;justify-content:space-between;font-size:.8rem}
+.skip{position:absolute;left:-9999px}
+.skip:focus{left:16px;top:12px;background:var(--white);padding:10px 16px;z-index:99;border-radius:var(--r)}
+</style>
+</head>
+<body>
+<a href="#main" class="skip">Skip to content</a>
+<nav class="tswitch" aria-label="Version switcher">
+  <a href="../" data-tier-link title="Both options">&larr; Both</a>
+  <span class="seg">
+    <a href="../essentials/" data-tier-link class="on" aria-current="page">Option A<kbd>1</kbd></a>
+    <a href="../signature/" data-tier-link>Option B<kbd>2</kbd></a>
+  </span>
+  <a href="../compare/" data-tier-link title="Side by side">Compare<kbd>C</kbd></a>
+</nav>
+<script src="../assets/switch.js" defer></script>
+
+
+<header>
+  <div class="wrap nav">
+    <a class="brand" href="#top">HK<span>.</span> Hair Studio</a>
+    <nav class="nav-links">
+      <a href="#services">Services</a>
+      <a href="#work">Our work</a>
+      <a href="#salon">The salon</a>
+      <a href="#team">Team</a>
+      <a href="#visit">Visit</a>
+    </nav>
+    <div class="nav-cta">
+      <a class="nav-tel" id="navTel" href="#">01223 694 812</a>
+      <button class="btn btn-primary" data-book>Book Now</button>
+    </div>
+  </div>
+</header>
+
+<main id="main">
+
+<section class="hero" id="top">
+  <div class="wrap hero-grid">
+    <div>
+      <div class="stars"><span class="s">★★★★★</span> <b>4.9</b> · 357 verified reviews</div>
+      <h1>Cambridge hair,<br>done properly.</h1>
+      <p class="lead">A hair salon and barbers on Perne Road. Cuts, colour, fades, extensions and treatments &mdash; seven stylists, open seven days, and a chair for everyone.</p>
+      <div class="hero-btns">
+        <button class="btn btn-primary btn-lg" data-book>Book an appointment</button>
+        <a class="btn btn-ghost btn-lg" id="heroTel" href="#">Call the salon</a>
+      </div>
+    </div>
+    <img class="hero-img" alt="Balayage by HK Hair Studio, Cambridge" src="../assets/img/hkh-balayage-transformation.jpg">
+  </div>
+</section>
+
+<section class="trust">
+  <div class="wrap trust-grid">
+    <div><div class="trust-n">4.9</div><div class="trust-l">Overall rating</div></div>
+    <div><div class="trust-n">357</div><div class="trust-l">Verified reviews</div></div>
+    <div><div class="trust-n">4.9</div><div class="trust-l">Staff score</div></div>
+    <div><div class="trust-n">7</div><div class="trust-l">Days a week</div></div>
+  </div>
+</section>
+
+<section id="book">
+  <div class="wrap book-inner">
+    <p class="eyebrow">Booking</p>
+    <h2>Book online, any time</h2>
+    <p>Pick your service, your stylist and your slot. Bookings go straight into the salon diary and you'll get a confirmation by email. Cash, credit and debit cards accepted in salon.</p>
+    <div class="book-actions">
+      <button class="btn btn-primary btn-lg" data-book>Book Now</button>
+      <a class="btn btn-ghost btn-lg" id="waBtn" href="#" target="_blank" rel="noopener">Message on WhatsApp</a>
+    </div>
+    <div class="widget-shell" id="widgetShell">
+      <div class="widget-bar">
+        <span>Secure booking</span>
+        <button type="button" id="widgetClose">Close ✕</button>
+      </div>
+      <div id="widgetMount"></div>
+    </div>
+  </div>
+</section>
+
+<section id="services">
+  <div class="wrap">
+    <div class="svc-head">
+      <div>
+        <p class="eyebrow">Services</p>
+        <h2>Prices</h2>
+        <p class="lead">The full live menu. Where a service shows a range, the price depends on hair length &mdash; we'll confirm it with you before we start.</p>
+      </div>
+      <img class="svc-img" id="svcImg" alt="Work by HK Hair Studio" src="../assets/img/hkh-layered-cut.jpg">
+    </div>
+
+    <div class="tabs" role="tablist">
+      <button class="tab" role="tab" aria-selected="true"  data-panel="p-ladies" data-img="../assets/img/hkh-layered-cut.jpg">Ladies'</button>
+      <button class="tab" role="tab" aria-selected="false" data-panel="p-colour" data-img="../assets/img/hkh-balayage-waves.jpg">Colour &amp; Treatments</button>
+      <button class="tab" role="tab" aria-selected="false" data-panel="p-men"    data-img="../assets/img/hkh-skin-fade.jpg">Men's</button>
+      <button class="tab" role="tab" aria-selected="false" data-panel="p-ext"    data-img="../assets/img/hkh-blonde-straight.jpg">Extensions</button>
+    </div>
+
+    <div class="panel active" id="p-ladies">
+      <div class="svc-cols">
+        <div>
+          <div class="svc"><div><div class="svc-name">Hair Cut</div><div class="svc-dur">30 min</div></div><span class="svc-dot"></span><div class="svc-price">£30</div></div>
+          <div class="svc"><div><div class="svc-name">Wash &amp; Haircut</div><div class="svc-dur">40 min</div></div><span class="svc-dot"></span><div class="svc-price">£35</div></div>
+          <div class="svc"><div><div class="svc-name">Wash, Haircut &amp; Blow Dry</div><div class="svc-dur">45 min – 1 hr · short £50 / long £60</div></div><span class="svc-dot"></span><div class="svc-price">£50–60</div></div>
+          <div class="svc"><div><div class="svc-name">Hair Up</div><div class="svc-dur">45 min · occasions &amp; weddings</div></div><span class="svc-dot"></span><div class="svc-price">£50</div></div>
+        </div>
+        <div>
+          <div class="svc"><div><div class="svc-name">Blow Dry</div><div class="svc-dur">30–35 min · short £30 / long £35</div></div><span class="svc-dot"></span><div class="svc-price">£30–35</div></div>
+          <div class="svc"><div><div class="svc-name">Wash &amp; Blow Dry</div><div class="svc-dur">40–45 min · short £35 / long £40</div></div><span class="svc-dot"></span><div class="svc-price">£35–40</div></div>
+          <div class="svc"><div><div class="svc-name">Children's Cut (under 14)</div><div class="svc-dur">25 min</div></div><span class="svc-dot"></span><div class="svc-price">£24</div></div>
+          <div class="svc"><div><div class="svc-name">Fringe Trim</div><div class="svc-dur">10 min</div></div><span class="svc-dot"></span><div class="svc-price">£10</div></div>
+        </div>
+      </div>
+      <p class="svc-note">A regular trim is what keeps length looking healthy rather than thin at the ends &mdash; most clients come back every six to eight weeks.</p>
+    </div>
+
+    <div class="panel" id="p-colour">
+      <div class="svc-cols">
+        <div>
+          <h3 class="grp">Colour</h3>
+          <div class="svc"><div><div class="svc-name">Toner</div><div class="svc-dur">30 min</div></div><span class="svc-dot"></span><div class="svc-price">£30</div></div>
+          <div class="svc"><div><div class="svc-name">Roots Colour</div><div class="svc-dur">1 hr</div></div><span class="svc-dot"></span><div class="svc-price">£60</div></div>
+          <div class="svc"><div><div class="svc-name">Full Colour</div><div class="svc-dur">1 hr 30 min</div></div><span class="svc-dot"></span><div class="svc-price">from £80</div></div>
+          <div class="svc"><div><div class="svc-name">T-Section Highlights</div><div class="svc-dur">1 hr 30 min</div></div><span class="svc-dot"></span><div class="svc-price">from £80</div></div>
+          <div class="svc"><div><div class="svc-name">Half Head of Highlights</div><div class="svc-dur">1 hr 40 min</div></div><span class="svc-dot"></span><div class="svc-price">from £100</div></div>
+          <div class="svc"><div><div class="svc-name">Full Head Highlights</div><div class="svc-dur">2 hr 30 min</div></div><span class="svc-dot"></span><div class="svc-price">from £150</div></div>
+          <div class="svc"><div><div class="svc-name">Balayage</div><div class="svc-dur">3 hr 30 min</div></div><span class="svc-dot"></span><div class="svc-price">from £180</div></div>
+        </div>
+        <div>
+          <h3 class="grp">Treatments</h3>
+          <div class="svc"><div><div class="svc-name">Olaplex Treatment</div><div class="svc-dur">45 min</div></div><span class="svc-dot"></span><div class="svc-price">£40</div></div>
+          <div class="svc"><div><div class="svc-name">Keratin Treatment</div><div class="svc-dur">1 hr</div></div><span class="svc-dot"></span><div class="svc-price">from £100</div></div>
+          <div class="svc"><div><div class="svc-name">Brazilian Blowdry</div><div class="svc-dur">1 hr 45 – 2 hr 30 · by hair length</div></div><span class="svc-dot"></span><div class="svc-price">£200–250</div></div>
+          <div class="svc"><div><div class="svc-name">Perm</div><div class="svc-dur">2 hr 10 min</div></div><span class="svc-dot"></span><div class="svc-price">£200</div></div>
+          <h3 class="grp">Before you book</h3>
+          <div class="svc"><div><div class="svc-name">Patch Test</div><div class="svc-dur">5 min · required 48 hrs before colour</div></div><span class="svc-dot"></span><div class="svc-price">£1</div></div>
+        </div>
+      </div>
+      <p class="svc-note"><strong>Not sure what suits you?</strong> Skin tone matters as much as the shade &mdash; book the £1 consultation and we'll work it out together before anything goes near your hair. <strong>Patch test:</strong> required at least 48 hours before any colour, highlights, keratin or Brazilian blowdry if you haven't had one with us.</p>
+    </div>
+
+    <div class="panel" id="p-men">
+      <div class="svc-cols">
+        <div>
+          <h3 class="grp">Cuts</h3>
+          <div class="svc"><div><div class="svc-name">Haircut &amp; Styling</div><div class="svc-dur">25 min</div></div><span class="svc-dot"></span><div class="svc-price">£20</div></div>
+          <div class="svc"><div><div class="svc-name">Skin Fade / Taper Fade &amp; Styling</div><div class="svc-dur">30 min</div></div><span class="svc-dot"></span><div class="svc-price">£23</div></div>
+          <div class="svc"><div><div class="svc-name">Full Scissors Cut &amp; Styling</div><div class="svc-dur">25 min</div></div><span class="svc-dot"></span><div class="svc-price">£21</div></div>
+          <div class="svc"><div><div class="svc-name">Clipper Cut All Over</div><div class="svc-dur">20 min</div></div><span class="svc-dot"></span><div class="svc-price">£17</div></div>
+          <div class="svc"><div><div class="svc-name">Re-Style</div><div class="svc-dur">35 min</div></div><span class="svc-dot"></span><div class="svc-price">£25</div></div>
+          <div class="svc"><div><div class="svc-name">O.A.P (Mon–Thu)</div><div class="svc-dur">25 min</div></div><span class="svc-dot"></span><div class="svc-price">£17</div></div>
+          <div class="svc"><div><div class="svc-name">Kids Haircut (under 14)</div><div class="svc-dur">20 min</div></div><span class="svc-dot"></span><div class="svc-price">£17</div></div>
+          <div class="svc"><div><div class="svc-name">Kids Skin Fade (under 14)</div><div class="svc-dur">25 min</div></div><span class="svc-dot"></span><div class="svc-price">£20</div></div>
+          <div class="svc"><div><div class="svc-name">Wash</div><div class="svc-dur">5 min</div></div><span class="svc-dot"></span><div class="svc-price">£3</div></div>
+        </div>
+        <div>
+          <h3 class="grp">Cut &amp; beard packages</h3>
+          <div class="svc"><div><div class="svc-name">Cut, Beard, Hot Towel &amp; Styling</div><div class="svc-dur">45 min</div></div><span class="svc-dot"></span><div class="svc-price">£34</div></div>
+          <div class="svc"><div><div class="svc-name">Skin Fade, Styling, Beard Trim &amp; Hot Towel</div><div class="svc-dur">50 min</div></div><span class="svc-dot"></span><div class="svc-price">£37</div></div>
+          <h3 class="grp">Beard &amp; grooming</h3>
+          <div class="svc"><div><div class="svc-name">Beard Trim / Shape Up / Hot Towel</div><div class="svc-dur">25 min</div></div><span class="svc-dot"></span><div class="svc-price">£18</div></div>
+          <div class="svc"><div><div class="svc-name">Beard Trim (clippers only)</div><div class="svc-dur">15 min</div></div><span class="svc-dot"></span><div class="svc-price">£10</div></div>
+          <div class="svc"><div><div class="svc-name">Wet Shave &amp; Hot Towel</div><div class="svc-dur">30 min</div></div><span class="svc-dot"></span><div class="svc-price">£18</div></div>
+          <div class="svc"><div><div class="svc-name">Facial Waxing</div><div class="svc-dur">20 min</div></div><span class="svc-dot"></span><div class="svc-price">£10</div></div>
+          <div class="svc"><div><div class="svc-name">Facial Mask</div><div class="svc-dur">25 min</div></div><span class="svc-dot"></span><div class="svc-price">£10</div></div>
+          <h3 class="grp">Colour &amp; perms</h3>
+          <div class="svc"><div><div class="svc-name">Hair Colour</div><div class="svc-dur">40 min</div></div><span class="svc-dot"></span><div class="svc-price">£40</div></div>
+          <div class="svc"><div><div class="svc-name">Beard Colour</div><div class="svc-dur">40 min</div></div><span class="svc-dot"></span><div class="svc-price">£20</div></div>
+          <div class="svc"><div><div class="svc-name">Hair Colouring With Bleach</div><div class="svc-dur">2 hr 10 min</div></div><span class="svc-dot"></span><div class="svc-price">from £100</div></div>
+          <div class="svc"><div><div class="svc-name">Men's Perm (over 16)</div><div class="svc-dur">1 hr</div></div><span class="svc-dot"></span><div class="svc-price">£90</div></div>
+        </div>
+      </div>
+      <p class="svc-note">Trends come and go &mdash; a sharp fade and a tidy beard don't. Twenty services on the men's menu, from a £3 wash to a full cut, beard and hot towel.</p>
+    </div>
+
+    <div class="panel" id="p-ext">
+      <div class="svc-cols">
+        <div>
+          <div class="svc"><div><div class="svc-name">Consultation</div><div class="svc-dur">15 min</div></div><span class="svc-dot"></span><div class="svc-price">£1</div></div>
+          <div class="svc"><div><div class="svc-name">Hair Extensions Consultation</div><div class="svc-dur">20 min</div></div><span class="svc-dot"></span><div class="svc-price">£1</div></div>
+        </div>
+        <div>
+          <div class="svc"><div><div class="svc-name">Hair Extensions — full fitting</div><div class="svc-dur">2 hr</div></div><span class="svc-dot"></span><div class="svc-price">from £450</div></div>
+        </div>
+      </div>
+      <p class="svc-note">Extensions start with a £1 consultation so we can match colour, texture and length properly, and price the fitting for your hair. Book the consultation first.</p>
+    </div>
+  </div>
+</section>
+
+<section id="work" class="work">
+  <div class="wrap">
+    <p class="eyebrow">Our work</p>
+    <h2>Recent from the chair</h2>
+    <p class="lead">Every one of these walked out of the salon on Perne Road.</p>
+    <div class="work-grid">
+      <figure><img src="../assets/img/hkh-balayage-transformation.jpg" alt="Balayage transformation"><figcaption>From warm, uneven tones to a seamless, dimensional blonde.</figcaption></figure>
+      <figure><img src="../assets/img/hkh-balayage-waves.jpg" alt="Blonde balayage, long waves"><figcaption>Fresh colour, soft waves — light-reflecting shine from roots to ends.</figcaption></figure>
+      <figure><img src="../assets/img/hkh-balayage-blowout.jpg" alt="Brunette balayage blow-out"><figcaption>Soft transitions and warm, modern tones with volume through the mid-lengths.</figcaption></figure>
+      <figure><img src="../assets/img/hkh-layered-cut.jpg" alt="Layered cut with curtain fringe"><figcaption>Soft layers, a shape that suits the face, every detail cut with care.</figcaption></figure>
+      <figure><img src="../assets/img/hkh-blonde-straight.jpg" alt="Full blonde, sleek finish"><figcaption>Full head of highlights, finished sleek and glassy.</figcaption></figure>
+      <figure><img class="land" src="../assets/img/hkh-skin-fade.jpg" alt="Men's skin fade"><figcaption>Fresh skin fade and beard. Sharp, clean, confident.</figcaption></figure>
+    </div>
+  </div>
+</section>
+
+<section id="salon">
+  <div class="wrap">
+    <p class="eyebrow">The salon</p>
+    <h2>Have a look around</h2>
+    <p class="lead">Bright, clean and busy, five minutes from the Perne Road roundabout.</p>
+    <div class="gal">
+      <img loading="lazy" alt="HK Hair Studio shopfront on Perne Road, lit at dusk" src="../assets/img/hkh-shopfront.jpg">
+      <img loading="lazy" alt="Inside HK Hair Studio — the hairdressing floor and the barber side" src="../assets/img/hkh-salon-interior.jpg">
+      <img loading="lazy" alt="The barber stations, with marble tops and leather chairs" src="../assets/img/hkh-barber-stations.jpg">
+      <img loading="lazy" alt="The backwash basins at HK Hair Studio" src="../assets/img/hkh-washstation.jpg">
+    </div>
+  </div>
+</section>
+
+<section id="team">
+  <div class="wrap">
+    <p class="eyebrow">The team</p>
+    <h2>Seven pairs of hands</h2>
+    <p class="lead">Barbers and hairdressers under one roof. Book with whoever you like &mdash; or leave it to us.</p>
+    <div class="team-grid">
+      <div class="member"><h3>Hüseyin</h3><div class="role">Hairdresser</div><div class="rate">★ 4.9 · 81 reviews</div></div>
+      <div class="member"><h3>Stacey</h3><div class="role">Hairdresser</div><div class="rate">★ 5.0 · 61 reviews</div></div>
+      <div class="member"><h3>Hami</h3><div class="role">Barber</div><div class="rate">★ 5.0 · 24 reviews</div></div>
+      <div class="member"><h3>Marcus</h3><div class="role">Barber</div><div class="rate">★ 5.0 · 16 reviews</div></div>
+      <div class="member"><h3>Yanbolu</h3><div class="role">Hairdresser</div><div class="rate">★ 4.8 · 15 reviews</div></div>
+      <div class="member"><h3>Yunus</h3><div class="role">Barber</div><div class="rate">★ 4.9 · 10 reviews</div></div>
+      <div class="member"><h3>Sihan</h3><div class="role">Barber</div><div class="rate">Book online</div></div>
+      <div class="member"><h3>Join the team</h3><div class="role">We're always open to good stylists</div><div class="rate">Get in touch</div></div>
+    </div>
+  </div>
+</section>
+
+<section id="know">
+  <div class="wrap">
+    <p class="eyebrow">Good to know</p>
+    <h2>Your first visit</h2>
+    <div class="know-grid know">
+      <div><h3>Book or walk in</h3><p>Online booking is open 24/7 and goes straight into the diary. Walk in if you'd rather &mdash; we'll fit you in when we can.</p></div>
+      <div><h3>Patch test first</h3><p>Any colour, highlights, keratin or Brazilian blowdry needs a patch test at least 48 hours before. Five minutes, £1.</p></div>
+      <div><h3>Not sure what to book?</h3><p>Book the £1 consultation. We'll talk through colour, length and what actually suits you before committing to anything.</p></div>
+      <div><h3>Paying</h3><p>Cash, credit card and debit card all fine in the salon. Online bookings are confirmed by email.</p></div>
+    </div>
+  </div>
+</section>
+
+<section id="reviews">
+  <div class="wrap">
+    <p class="eyebrow">Reviews</p>
+    <h2>4.9 from 357 verified reviews</h2>
+    <div class="rev-grid">
+      <div class="rev"><div class="s">★★★★★</div><p>"I was very pleased with my perm experience. Hüseyin guided me perfectly throughout and made sure it was done in a way that wouldn't damage my hair. The result was amazing!"</p><div class="who">Idil · August 2026</div></div>
+      <div class="rev"><div class="s">★★★★★</div><p>"Very nice employees, the atmosphere was very clean, and they thoroughly explained what they were doing to my hair and how to keep it more moisturised."</p><div class="who">Eylulsu · August 2026</div></div>
+      <div class="rev"><div class="s">★★★★★</div><p>"Marcus is an excellent practitioner."</p><div class="who">Simon · August 2026</div></div>
+    </div>
+  </div>
+</section>
+
+<section id="visit">
+  <div class="wrap">
+    <p class="eyebrow">Visit</p>
+    <h2>Find us</h2>
+    <div class="visit-grid">
+      <div>
+        <dl class="detail"><dt>Address</dt><dd><a id="mapLink" href="#" target="_blank" rel="noopener">3 Adkins Corner, Perne Road,<br>Cambridge, CB1 3RU</a></dd></dl>
+        <dl class="detail"><dt>Phone</dt><dd><a id="visitTel" href="#">01223 694 812</a></dd></dl>
+        <dl class="detail"><dt>WhatsApp</dt><dd><a id="visitWa" href="#" target="_blank" rel="noopener">+44 7747 205147</a></dd></dl>
+        <dl class="detail"><dt>Email</dt><dd><a id="visitMail" href="#">hkhairstudio.uk@gmail.com</a></dd></dl>
+        <dl class="detail"><dt>Instagram</dt><dd><a id="visitIg" href="#" target="_blank" rel="noopener">@hkhairstudio1</a></dd></dl>
+        <dl class="detail"><dt>Payment</dt><dd>Cash, credit card and debit card</dd></dl>
+      </div>
+      <div>
+        <h3 style="margin-bottom:14px">Opening hours</h3>
+        <table class="hours" id="hours">
+          <tr data-d="1"><td>Monday</td><td>9:00 – 19:00</td></tr>
+          <tr data-d="2"><td>Tuesday</td><td>9:00 – 19:00</td></tr>
+          <tr data-d="3"><td>Wednesday</td><td>9:00 – 19:00</td></tr>
+          <tr data-d="4"><td>Thursday</td><td>9:00 – 19:00</td></tr>
+          <tr data-d="5"><td>Friday</td><td>9:00 – 19:00</td></tr>
+          <tr data-d="6"><td>Saturday</td><td>9:00 – 19:00</td></tr>
+          <tr data-d="0"><td>Sunday</td><td>10:00 – 17:00</td></tr>
+        </table>
+        <p style="margin-top:22px"><button class="btn btn-ghost" data-book>Check availability</button></p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="enquire">
+  <div class="wrap">
+    <p class="eyebrow">Contact</p>
+    <h2>Ask us anything</h2>
+    <p class="lead">Colour consultation, extensions, a wedding, or just not sure what to book &mdash; send us a note and we'll come back to you.</p>
+    <form class="form" id="enquiryForm" novalidate>
+      <div class="row2">
+        <div class="field"><label for="f-name">Name</label><input id="f-name" name="name" required autocomplete="name"></div>
+        <div class="field"><label for="f-phone">Phone</label><input id="f-phone" name="phone" type="tel" required autocomplete="tel"></div>
+      </div>
+      <div class="row2">
+        <div class="field"><label for="f-email">Email</label><input id="f-email" name="email" type="email" autocomplete="email"></div>
+        <div class="field"><label for="f-service">Interested in</label>
+          <select id="f-service" name="service">
+            <option>Not sure yet</option>
+            <option>Men's cut / barbering</option>
+            <option>Ladies' cut &amp; blow dry</option>
+            <option>Colour or highlights</option>
+            <option>Balayage</option>
+            <option>Keratin / Brazilian blowdry</option>
+            <option>Olaplex or treatments</option>
+            <option>Hair extensions</option>
+            <option>Hair up / occasion</option>
+            <option>Perm</option>
+          </select>
+        </div>
+      </div>
+      <div class="field"><label for="f-msg">Message</label><textarea id="f-msg" name="message"></textarea></div>
+      <button class="btn btn-primary btn-lg" type="submit" id="submitBtn">Send enquiry</button>
+      <div class="form-msg" id="formMsg" role="status" aria-live="polite"></div>
+    </form>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <div class="wrap foot-grid">
+    <div>
+      <a class="brand" href="#top">HK<span>.</span> Hair Studio</a>
+      <p style="max-width:34ch">3 Adkins Corner, Perne Road, Cambridge, CB1 3RU</p>
+      <p>★ 4.9 from 357 verified reviews</p>
+    </div>
+    <div>
+      <div class="foot-h">Hours</div>
+      <ul class="foot-list">
+        <li>Mon – Sat &nbsp; 9:00 – 19:00</li>
+        <li>Sunday &nbsp; 10:00 – 17:00</li>
+      </ul>
+    </div>
+    <div>
+      <div class="foot-h">Contact</div>
+      <ul class="foot-list">
+        <li><a id="footTel" href="#">01223 694 812</a></li>
+        <li><a id="footWa" href="#" target="_blank" rel="noopener">WhatsApp</a></li>
+        <li><a id="footIg" href="#" target="_blank" rel="noopener">Instagram</a></li>
+        <li><a id="footMail" href="#">Email us</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="wrap foot-bot">
+    <span>© <span id="yr"></span> HK Hair Studio</span>
+    <span>Site by Crescendo</span>
+  </div>
+</footer>
+
+<script>
+(function(){
+  const $  = s => document.querySelector(s);
+  const $$ = s => Array.from(document.querySelectorAll(s));
+  const tel  = "tel:" + CONFIG.PHONE;
+  const wa   = "https://wa.me/" + CONFIG.WHATSAPP;
+  const mail = "mailto:" + CONFIG.EMAIL;
+  [["#navTel",tel],["#heroTel",tel],["#visitTel",tel],["#footTel",tel],
+   ["#waBtn",wa],["#visitWa",wa],["#footWa",wa],
+   ["#visitMail",mail],["#footMail",mail],
+   ["#visitIg",CONFIG.INSTAGRAM],["#footIg",CONFIG.INSTAGRAM],
+   ["#mapLink",CONFIG.MAPS]].forEach(([sel,href])=>{ const el=$(sel); if(el) el.href=href; });
+  $("#yr").textContent = new Date().getFullYear();
+  const row = $('#hours tr[data-d="'+new Date().getDay()+'"]');
+  if(row) row.classList.add("today");
+
+  const shell = $("#widgetShell"), mount = $("#widgetMount");
+  let mounted = false;
+  function openBooking(e){
+    if(e) e.preventDefault();
+    if(!CONFIG.TREATWELL_WIDGET_URL){
+      if(CONFIG.TREATWELL_PROFILE_URL) window.open(CONFIG.TREATWELL_PROFILE_URL,"_blank","noopener");
+      else window.location.href = tel;
+      return;
+    }
+    if(!mounted){
+      const f = document.createElement("iframe");
+      f.src = CONFIG.TREATWELL_WIDGET_URL;
+      f.title = "Book an appointment at HK Hair Studio";
+      f.loading = "lazy";
+      f.setAttribute("allow","payment");
+      mount.appendChild(f);
+      mounted = true;
+    }
+    shell.classList.add("open");
+    shell.scrollIntoView({behavior:"smooth", block:"center"});
+  }
+  $$("[data-book]").forEach(b => b.addEventListener("click", openBooking));
+  $("#widgetClose").addEventListener("click", () => shell.classList.remove("open"));
+
+  const svcImg = $("#svcImg");
+  $$(".tab").forEach(tab => tab.addEventListener("click", () => {
+    $$(".tab").forEach(t => t.setAttribute("aria-selected", String(t === tab)));
+    $$(".panel").forEach(p => p.classList.toggle("active", p.id === tab.dataset.panel));
+    if(svcImg && tab.dataset.img) svcImg.src = tab.dataset.img;
+  }));
+
+  const form = $("#enquiryForm"), msg = $("#formMsg"), btn = $("#submitBtn");
+  form.addEventListener("submit", async ev => {
+    ev.preventDefault();
+    msg.className = "form-msg"; msg.textContent = "";
+    const d = Object.fromEntries(new FormData(form).entries());
+    if(!d.name || !d.phone){
+      msg.className = "form-msg err";
+      msg.textContent = "Please give us your name and a phone number.";
+      return;
+    }
+    if(!CONFIG.SUPABASE_URL || !CONFIG.SUPABASE_ANON_KEY){
+      const text = encodeURIComponent(
+        `Hi HK Hair Studio, I'd like to enquire.\n\nName: ${d.name}\nPhone: ${d.phone}` +
+        (d.email ? `\nEmail: ${d.email}` : "") +
+        `\nService: ${d.service}` + (d.message ? `\n\n${d.message}` : "")
+      );
+      window.open(wa + "?text=" + text, "_blank", "noopener");
+      msg.className = "form-msg ok";
+      msg.textContent = "Opening WhatsApp so you can send that to us…";
+      form.reset();
+      return;
+    }
+    btn.disabled = true; btn.textContent = "Sending…";
+    try{
+      const res = await fetch(
+        CONFIG.SUPABASE_URL.replace(/\/$/,"") + "/rest/v1/" + CONFIG.SUPABASE_TABLE,
+        { method:"POST",
+          headers:{"Content-Type":"application/json","apikey":CONFIG.SUPABASE_ANON_KEY,
+                   "Authorization":"Bearer "+CONFIG.SUPABASE_ANON_KEY,"Prefer":"return=minimal"},
+          body: JSON.stringify({ ...d, source:"website" }) });
+      if(!res.ok) throw new Error(res.status);
+      msg.className = "form-msg ok";
+      msg.textContent = "Thanks — we've got that. We'll be in touch shortly.";
+      form.reset();
+    }catch(err){
+      msg.className = "form-msg err";
+      msg.innerHTML = 'Something went wrong. Please call <a href="'+tel+'" style="color:inherit">'+CONFIG.PHONE_FMT+'</a> or message us on WhatsApp.';
+    }finally{
+      btn.disabled = false; btn.textContent = "Send enquiry";
+    }
+  });
+})();
+</script>
+
+<script type="application/ld+json">
+{
+  "@context":"https://schema.org","@type":"HairSalon","name":"HK Hair Studio",
+  "address":{"@type":"PostalAddress","streetAddress":"3 Adkins Corner, Perne Road","addressLocality":"Cambridge","postalCode":"CB1 3RU","addressCountry":"GB"},
+  "geo":{"@type":"GeoCoordinates","latitude":52.18724463,"longitude":0.15299067},
+  "telephone":"+441223694812","email":"hkhairstudio.uk@gmail.com","url":"https://hkhairstudio.co.uk/",
+  "priceRange":"££","paymentAccepted":"Cash, Credit card, Debit card",
+  "aggregateRating":{"@type":"AggregateRating","ratingValue":"4.9","reviewCount":"357"},
+  "openingHoursSpecification":[
+    {"@type":"OpeningHoursSpecification","dayOfWeek":["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"],"opens":"09:00","closes":"19:00"},
+    {"@type":"OpeningHoursSpecification","dayOfWeek":"Sunday","opens":"10:00","closes":"17:00"}],
+  "sameAs":["https://www.instagram.com/hkhairstudio1","https://www.treatwell.co.uk/place/hk-hair-studio/"]
+}
+</script>
+</body>
+</html>

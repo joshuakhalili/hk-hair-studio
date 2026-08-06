@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>HK Signature — in build</title>
+<meta name="robots" content="noindex, nofollow">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/switch.css">
+<style>
+:root{--ink:#0e0c0b;--paper:#f7f4ef;--line:rgba(247,244,239,.16);--gold:#a8834b;--mute:rgba(247,244,239,.58)}
+*{box-sizing:border-box}
+body{margin:0;background:var(--ink);color:var(--paper);
+  font-family:Inter,-apple-system,BlinkMacSystemFont,sans-serif;line-height:1.6;
+  -webkit-font-smoothing:antialiased;min-height:100vh;display:flex;flex-direction:column}
+a{color:inherit}
+.wrap{max-width:1040px;margin:0 auto;padding:0 24px;width:100%}
+header{padding:26px 0;border-bottom:1px solid var(--line)}
+.back{font-size:.85rem;color:var(--mute);text-decoration:none}
+.back:hover{color:var(--paper)}
+main{flex:1;padding:clamp(56px,9vw,110px) 0}
+.kicker{font-size:.7rem;letter-spacing:.22em;text-transform:uppercase;color:var(--gold);font-weight:600}
+h1{font-family:Fraunces,Georgia,serif;font-weight:600;font-size:clamp(2.2rem,6vw,3.8rem);
+  line-height:1.08;margin:14px 0 18px;letter-spacing:-.015em}
+.sub{color:var(--mute);max-width:56ch;font-size:1.05rem;margin-bottom:52px}
+h2{font-family:Fraunces,serif;font-weight:600;font-size:1.3rem;margin:0 0 18px}
+.cols{display:grid;gap:44px}
+@media(min-width:860px){.cols{grid-template-columns:1fr 1fr;gap:64px}}
+ul{list-style:none;margin:0;padding:0;font-size:.95rem;color:var(--mute)}
+li{padding:9px 0 9px 22px;position:relative;border-bottom:1px solid rgba(247,244,239,.08)}
+li::before{content:"";position:absolute;left:0;top:19px;width:8px;height:1px;background:var(--gold)}
+li b{color:var(--paper);font-weight:600}
+.note{margin-top:56px;padding:24px 26px;border:1px solid var(--line);border-radius:6px;
+  font-size:.92rem;color:var(--mute);max-width:70ch}
+.note b{color:var(--paper)}
+footer{border-top:1px solid var(--line);padding:22px 0 30px;font-size:.78rem;color:var(--mute)}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap"><a class="back" href="../" data-tier-link>&larr; Both options</a></div>
+</header>
+
+<nav class="tswitch" aria-label="Version switcher">
+  <a href="../" data-tier-link title="Both options">&larr; Both</a>
+  <span class="seg">
+    <a href="../essentials/" data-tier-link>Option A<kbd>1</kbd></a>
+    <a href="../signature/" data-tier-link class="on" aria-current="page">Option B<kbd>2</kbd></a>
+  </span>
+  <a href="../compare/" data-tier-link title="Side by side">Compare<kbd>C</kbd></a>
+</nav>
+
+<main>
+  <div class="wrap">
+    <span class="kicker">Option B · £1,000</span>
+    <h1>HK Signature</h1>
+    <p class="sub">The full build. Same salon, same prices, same diary &mdash; presented like the best salon in Cambridge rather than a list of services.</p>
+
+    <div class="cols">
+      <div>
+        <h2>How it feels</h2>
+        <ul>
+          <li><b>Cinematic hero</b> — full-bleed image or video, headline revealing on load</li>
+          <li><b>Parallax depth</b> — layers moving at different speeds as you scroll</li>
+          <li><b>Scroll animation</b> — sections rising into place as you reach them</li>
+          <li><b>Page transitions</b> — a proper wipe between pages, no white flash</li>
+          <li><b>Work carousel</b> — drag through recent colour and cuts</li>
+          <li><b>Pinned services</b> — the category list holds while the menu changes beside it</li>
+          <li><b>Counting stats</b> — 357 reviews, 4.9 stars, 7 stylists</li>
+        </ul>
+      </div>
+      <div>
+        <h2>What it does</h2>
+        <ul>
+          <li><b>Booking inside the page</b> — service, stylist, date, time, confirm. No Treatwell frame.</li>
+          <li><b>Live Google reviews</b> — pulled in and rotating, always current</li>
+          <li><b>Appointment tracking</b> — what, when, who with, add to calendar, reschedule</li>
+          <li><b>Review capture</b> — happy clients routed to Google, unhappy ones to your inbox</li>
+          <li><b>Instagram feed</b> — @hkhairstudio1 flowing straight into the gallery</li>
+          <li><b>Gift vouchers</b> — sold from the site</li>
+          <li><b>Loyalty</b> — repeat customers recognised</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="note">
+      <b>This preview is in build.</b> The design is being finished now &mdash; the page you're
+      reading is a holding page, not the product. Everything listed above is scoped and
+      costed at £1,000 for the complete site.
+      <br><br>
+      Live booking data, Google API access and Treatwell integration are a second phase,
+      and depend on account access from the salon.
+    </div>
+  </div>
+</main>
+
+<footer>
+  <div class="wrap">HK Hair Studio · Prepared by Crescendo</div>
+</footer>
+
+<script src="../assets/switch.js" defer></script>
+
+</body>
+</html>

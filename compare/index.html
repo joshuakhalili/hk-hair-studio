@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>HK Hair Studio — Option A vs Option B</title>
+<meta name="robots" content="noindex, nofollow">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#0e0c0b; --paper:#f7f4ef; --gold:#a8834b;
+  --line:rgba(247,244,239,.16); --mute:rgba(247,244,239,.58);
+  --bar:52px; --split:50%;
+}
+*{box-sizing:border-box}
+html,body{height:100%}
+body{margin:0;background:var(--ink);color:var(--paper);overflow:hidden;
+  font-family:Inter,-apple-system,BlinkMacSystemFont,sans-serif;
+  font-size:13px;-webkit-font-smoothing:antialiased}
+
+/* ---------- top bar ---------- */
+.bar{height:var(--bar);display:flex;align-items:center;gap:14px;
+  padding:0 14px;border-bottom:1px solid var(--line);
+  background:var(--ink);position:relative;z-index:20}
+.bar .brand{font-family:Fraunces,Georgia,serif;font-weight:600;font-size:14px;
+  letter-spacing:-.01em;white-space:nowrap}
+.bar .brand span{color:var(--gold);font-family:Inter,sans-serif;font-size:9.5px;
+  letter-spacing:.2em;text-transform:uppercase;display:block;font-weight:600;margin-bottom:1px}
+.spacer{flex:1}
+.grp{display:flex;align-items:center;gap:2px;background:rgba(247,244,239,.07);
+  border-radius:100px;padding:3px}
+.grp button,.bar>a.btn{
+  appearance:none;border:0;background:transparent;color:var(--mute);
+  font:500 12px/1 Inter,sans-serif;padding:7px 13px;border-radius:100px;
+  cursor:pointer;text-decoration:none;white-space:nowrap;transition:color .15s,background .15s}
+.grp button:hover,.bar>a.btn:hover{color:var(--paper)}
+.grp button[aria-pressed="true"]{background:var(--gold);color:var(--ink);font-weight:600}
+.bar>a.btn{border:1px solid var(--line);padding:7px 14px}
+.lbl{font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:var(--mute);
+  font-weight:600;white-space:nowrap}
+kbd{font:inherit;font-size:9.5px;opacity:.55;border:1px solid currentColor;
+  border-radius:3px;padding:1px 4px;margin-left:6px;line-height:1}
+
+/* ---------- split ---------- */
+.stage{position:absolute;inset:var(--bar) 0 0 0;display:flex;align-items:stretch}
+.pane{position:relative;overflow:hidden;background:#100e0d;
+  display:flex;flex-direction:column;min-width:0}
+.pane.a{width:var(--split)}
+.pane.b{flex:1}
+body[data-solo="a"] .pane.a{width:100%}
+body[data-solo="a"] .pane.b,body[data-solo="a"] .grip{display:none}
+body[data-solo="b"] .pane.a,body[data-solo="b"] .grip{display:none}
+
+/* Bottom, not top — the Essentials page has a sticky header and the two collided.
+   The tier switcher that normally sits down here is hidden inside the frame. */
+.tag{position:absolute;bottom:14px;left:50%;transform:translateX(-50%);z-index:6;
+  display:flex;align-items:center;gap:9px;
+  background:rgba(14,12,11,.9);border:1px solid var(--line);
+  -webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);
+  border-radius:100px;padding:6px 8px 6px 14px;
+  font-size:11.5px;font-weight:600;letter-spacing:.02em;white-space:nowrap;
+  box-shadow:0 6px 22px rgba(0,0,0,.4)}
+.tag em{font-style:normal;color:var(--gold);font-size:10px;letter-spacing:.16em;text-transform:uppercase}
+.tag b{font-weight:600}
+.tag .price{color:var(--mute);font-weight:500}
+.tag button{appearance:none;border:1px solid var(--line);background:transparent;
+  color:var(--mute);font:500 10.5px/1 Inter,sans-serif;padding:5px 9px;
+  border-radius:100px;cursor:pointer}
+.tag button:hover{color:var(--paper);border-color:var(--gold)}
+
+.frameWrap{flex:1;position:relative;overflow:hidden;display:flex;justify-content:center;
+  background:#100e0d;padding-top:0}
+iframe{border:0;width:100%;height:100%;background:var(--paper);display:block;
+  transition:max-width .22s ease}
+body[data-w="phone"]  iframe{max-width:390px;box-shadow:0 0 0 1px var(--line)}
+body[data-w="tablet"] iframe{max-width:834px;box-shadow:0 0 0 1px var(--line)}
+
+.grip{width:7px;flex:0 0 7px;cursor:col-resize;background:var(--line);
+  position:relative;z-index:10;transition:background .15s}
+.grip:hover,.grip.drag{background:var(--gold)}
+.grip::after{content:"";position:absolute;inset:0 -7px}
+
+/* ---------- notices ---------- */
+.note{position:absolute;left:50%;bottom:18px;transform:translateX(-50%);z-index:30;
+  max-width:min(680px,calc(100vw - 32px));
+  background:rgba(14,12,11,.95);border:1px solid var(--gold);border-radius:6px;
+  padding:14px 18px;font-size:12px;line-height:1.55;color:var(--mute);
+  box-shadow:0 12px 40px rgba(0,0,0,.5)}
+.note b{color:var(--paper)}
+.note code{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:11.5px;
+  background:rgba(247,244,239,.09);padding:2px 6px;border-radius:3px;color:var(--paper)}
+.note button{appearance:none;border:0;background:transparent;color:var(--gold);
+  font:600 11.5px/1 Inter,sans-serif;cursor:pointer;padding:0;margin-left:10px}
+.note[hidden]{display:none}
+
+@media(max-width:900px){
+  .bar{gap:9px;padding:0 10px;overflow-x:auto}
+  .bar .brand{display:none}
+  .lbl{display:none}
+  kbd{display:none}
+}
+/* Below this the split is useless — stack and let them solo instead. */
+@media(max-width:620px){
+  .stage{flex-direction:column}
+  .pane.a{width:100%;height:50%}
+  .pane.b{height:50%}
+  .grip{width:100%;flex:0 0 7px;height:7px;cursor:row-resize}
+}
+</style>
+</head>
+<body data-w="desktop">
+
+<div class="bar">
+  <div class="brand"><span>Crescendo</span>HK Hair Studio</div>
+
+  <a class="btn" href="../">&larr; Both options<kbd>Esc</kbd></a>
+
+  <span class="lbl">View</span>
+  <div class="grp" id="soloGrp">
+    <button data-solo="split" aria-pressed="true">Side by side</button>
+    <button data-solo="a" aria-pressed="false">A only<kbd>1</kbd></button>
+    <button data-solo="b" aria-pressed="false">B only<kbd>2</kbd></button>
+  </div>
+
+  <span class="lbl">Width</span>
+  <div class="grp" id="widthGrp">
+    <button data-w="desktop" aria-pressed="true">Desktop</button>
+    <button data-w="tablet"  aria-pressed="false">Tablet</button>
+    <button data-w="phone"   aria-pressed="false">Phone</button>
+  </div>
+
+  <div class="spacer"></div>
+
+  <div class="grp">
+    <button id="syncBtn" aria-pressed="true" title="Scroll both together">Linked scroll<kbd>L</kbd></button>
+    <button id="swapBtn" aria-pressed="false" title="Swap which side is which">Swap<kbd>S</kbd></button>
+    <button id="topBtn" title="Send both back to the top">Top<kbd>T</kbd></button>
+  </div>
+</div>
+
+<div class="stage">
+  <div class="pane a">
+    <div class="tag">
+      <em>Option A</em><b>HK Essentials</b><span class="price">£200</span>
+      <button data-solo-btn="a">Full width</button>
+    </div>
+    <div class="frameWrap"><iframe id="fA" src="../essentials/" title="Option A — HK Essentials"></iframe></div>
+  </div>
+
+  <div class="grip" id="grip" role="separator" aria-orientation="vertical" tabindex="0"
+       aria-label="Drag to resize the two panes"></div>
+
+  <div class="pane b">
+    <div class="tag">
+      <em>Option B</em><b>HK Signature</b><span class="price">£1,000</span>
+      <button data-solo-btn="b">Full width</button>
+    </div>
+    <div class="frameWrap"><iframe id="fB" src="../signature/" title="Option B — HK Signature"></iframe></div>
+  </div>
+</div>
+
+<div class="note" id="fileNote" hidden>
+  <b>Linked scrolling is off because this page was opened as a file.</b><br>
+  Browsers won't let a <code>file://</code> page talk to what's inside its frames. Everything
+  else works. To get linked scrolling, serve the folder instead —
+  <code>cd site &amp;&amp; python3 -m http.server 8000</code> then open
+  <code>localhost:8000/compare/</code>. On the published GitHub Pages URL it just works.
+  <button onclick="this.parentNode.hidden=true">Dismiss</button>
+</div>
+
+<script>
+(function () {
+  'use strict';
+
+  var body   = document.body;
+  var fA     = document.getElementById('fA');
+  var fB     = document.getElementById('fB');
+  var grip   = document.getElementById('grip');
+  var stage  = document.querySelector('.stage');
+  var linked = true;
+  var swapped = false;
+
+  /* ---------------- view mode (split / solo) ---------------- */
+  function setSolo(mode) {
+    if (mode === 'split') body.removeAttribute('data-solo');
+    else body.setAttribute('data-solo', mode);
+    document.querySelectorAll('#soloGrp button').forEach(function (b) {
+      b.setAttribute('aria-pressed', String(b.dataset.solo === mode));
+    });
+  }
+  document.getElementById('soloGrp').addEventListener('click', function (e) {
+    var b = e.target.closest('button'); if (b) setSolo(b.dataset.solo);
+  });
+  document.querySelectorAll('[data-solo-btn]').forEach(function (b) {
+    b.addEventListener('click', function () {
+      // Second press on the same side goes back to the split.
+      setSolo(body.dataset.solo === b.dataset.soloBtn ? 'split' : b.dataset.soloBtn);
+    });
+  });
+
+  /* ---------------- width preset ---------------- */
+  document.getElementById('widthGrp').addEventListener('click', function (e) {
+    var b = e.target.closest('button'); if (!b) return;
+    body.dataset.w = b.dataset.w;
+    document.querySelectorAll('#widthGrp button').forEach(function (x) {
+      x.setAttribute('aria-pressed', String(x.dataset.w === b.dataset.w));
+    });
+  });
+
+  /* ---------------- swap sides ---------------- */
+  var swapBtn = document.getElementById('swapBtn');
+  swapBtn.addEventListener('click', function () {
+    swapped = !swapped;
+    var a = fA.getAttribute('src'), b = fB.getAttribute('src');
+    fA.setAttribute('src', b); fB.setAttribute('src', a);
+
+    var tags = document.querySelectorAll('.tag');
+    var t0 = tags[0].innerHTML, t1 = tags[1].innerHTML;
+    tags[0].innerHTML = t1; tags[1].innerHTML = t0;
+    // innerHTML swap drops the listeners, so rebind.
+    document.querySelectorAll('[data-solo-btn]').forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        setSolo(body.dataset.solo === btn.dataset.soloBtn ? 'split' : btn.dataset.soloBtn);
+      });
+    });
+    swapBtn.setAttribute('aria-pressed', String(swapped));
+    wire();
+  });
+
+  /* ---------------- draggable divider ---------------- */
+  var dragging = false;
+  function moveTo(clientX, clientY) {
+    var r = stage.getBoundingClientRect();
+    var pct;
+    if (window.matchMedia('(max-width:620px)').matches) {
+      pct = ((clientY - r.top) / r.height) * 100;
+    } else {
+      pct = ((clientX - r.left) / r.width) * 100;
+    }
+    pct = Math.max(15, Math.min(85, pct));
+    document.documentElement.style.setProperty('--split', pct + '%');
+  }
+  grip.addEventListener('pointerdown', function (e) {
+    dragging = true; grip.classList.add('drag');
+    grip.setPointerCapture(e.pointerId);
+    // Frames swallow pointer events mid-drag otherwise.
+    document.querySelectorAll('iframe').forEach(function (f) { f.style.pointerEvents = 'none'; });
+  });
+  grip.addEventListener('pointermove', function (e) { if (dragging) moveTo(e.clientX, e.clientY); });
+  function endDrag() {
+    if (!dragging) return;
+    dragging = false; grip.classList.remove('drag');
+    document.querySelectorAll('iframe').forEach(function (f) { f.style.pointerEvents = ''; });
+  }
+  grip.addEventListener('pointerup', endDrag);
+  grip.addEventListener('pointercancel', endDrag);
+  grip.addEventListener('keydown', function (e) {
+    var cur = parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--split')) || 50;
+    if (e.key === 'ArrowLeft')  { document.documentElement.style.setProperty('--split', Math.max(15, cur - 2) + '%'); e.preventDefault(); }
+    if (e.key === 'ArrowRight') { document.documentElement.style.setProperty('--split', Math.min(85, cur + 2) + '%'); e.preventDefault(); }
+  });
+
+  /* ---------------- linked scrolling ----------------
+     The two pages are different lengths, so matching pixels would drift.
+     Match the fraction scrolled instead — at 40% down A you are 40% down B. */
+  var busy = false;
+  var bound = [];
+
+  function docOf(frame) {
+    try { return frame.contentDocument || frame.contentWindow.document; }
+    catch (e) { return null; }
+  }
+
+  function fractionOf(win, doc) {
+    var max = doc.documentElement.scrollHeight - win.innerHeight;
+    return max > 0 ? win.scrollY / max : 0;
+  }
+
+  function applyFraction(win, doc, f) {
+    var max = doc.documentElement.scrollHeight - win.innerHeight;
+    if (max > 0) win.scrollTo({ top: max * f, behavior: 'instant' });
+  }
+
+  function unwire() {
+    bound.forEach(function (b) {
+      try { b.win.removeEventListener('scroll', b.fn); } catch (e) {}
+    });
+    bound = [];
+  }
+
+  function wire() {
+    unwire();
+    var pairs = [[fA, fB], [fB, fA]];
+    var ok = true;
+
+    pairs.forEach(function (p) {
+      var srcFrame = p[0], dstFrame = p[1];
+      var sDoc = docOf(srcFrame);
+      if (!sDoc) { ok = false; return; }
+      var sWin = srcFrame.contentWindow;
+
+      var fn = function () {
+        if (!linked || busy) return;
+        var dDoc = docOf(dstFrame);
+        if (!dDoc) return;
+        busy = true;
+        applyFraction(dstFrame.contentWindow, dDoc, fractionOf(sWin, sDoc));
+        requestAnimationFrame(function () { busy = false; });
+      };
+      sWin.addEventListener('scroll', fn, { passive: true });
+      bound.push({ win: sWin, fn: fn });
+    });
+
+    document.getElementById('fileNote').hidden = ok;
+    if (!ok) { linked = false; syncBtn.setAttribute('aria-pressed', 'false'); }
+  }
+
+  [fA, fB].forEach(function (f) { f.addEventListener('load', wire); });
+
+  var syncBtn = document.getElementById('syncBtn');
+  syncBtn.addEventListener('click', function () {
+    linked = !linked;
+    syncBtn.setAttribute('aria-pressed', String(linked));
+  });
+
+  document.getElementById('topBtn').addEventListener('click', function () {
+    [fA, fB].forEach(function (f) {
+      var d = docOf(f);
+      if (d) f.contentWindow.scrollTo({ top: 0, behavior: 'instant' });
+    });
+  });
+
+  /* ---------------- keyboard ---------------- */
+  document.addEventListener('keydown', function (e) {
+    if (e.metaKey || e.ctrlKey || e.altKey) return;
+    var t = e.target;
+    if (t && (/^(INPUT|TEXTAREA|SELECT)$/.test(t.tagName) || t.isContentEditable)) return;
+
+    switch (String(e.key).toLowerCase()) {
+      case '1': setSolo('a'); break;
+      case '2': setSolo('b'); break;
+      case '3': case 'd': setSolo('split'); break;
+      case 'l': syncBtn.click(); break;
+      case 's': swapBtn.click(); break;
+      case 't': document.getElementById('topBtn').click(); break;
+      case 'escape': case '0': window.location.href = '../'; break;
+      default: return;
+    }
+    e.preventDefault();
+  });
+})();
+</script>
+
+</body>
+</html>
