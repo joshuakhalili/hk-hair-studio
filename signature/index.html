@@ -3,46 +3,880 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>HK Signature — in build</title>
+<title>HK Hair Studio — Salon &amp; Turkish Barbers, Cambridge</title>
+<meta name="description" content="A hairdressing salon and a Turkish barbershop sharing one room on Perne Road, Cambridge. 43 services, seven stylists, 4.89 from 357 verified reviews.">
+<!-- Demo, not the salon's live site — nothing is signed. Remove on go-live. -->
 <meta name="robots" content="noindex, nofollow">
+<meta property="og:title" content="HK Hair Studio — Cambridge">
+<meta property="og:description" content="Two crafts. One address. 4.89 from 357 verified reviews.">
+<meta property="og:type" content="website">
+
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:opsz,wght@6..96,400;6..96,500;6..96,600&family=IBM+Plex+Mono:wght@400;500&family=Inter:wght@400;450;500;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="../assets/switch.css">
+
+<!-- Classic, parser-blocking. `js` must land before first paint or the reveal
+     tiers flash. Nothing else belongs in here. -->
+<script>document.documentElement.classList.add('js');</script>
+
 <style>
-:root{--ink:#0e0c0b;--paper:#f7f4ef;--line:rgba(247,244,239,.16);--gold:#a8834b;--mute:rgba(247,244,239,.58)}
+/* ============================================================================
+   HK SIGNATURE — Tier 2
+   Plain HTML/CSS/JS. No framework, no build step, no external JS.
+
+   Three rules this file never breaks:
+     1. overflow: clip, never overflow: hidden. `hidden` makes a scroll container,
+        which silently kills position:sticky and corrupts view() progress.
+     2. `animation-timeline` is declared AFTER the `animation` shorthand — the
+        shorthand resets it to auto.
+     3. The finished, visible state is the CSS default. Hidden start states live
+        INSIDE the motion guards. Fail any guard and you get finished content,
+        never a blank box.
+
+   Every price, duration, name, rating and opening hour comes from Treatwell
+   venue 462045 (data/treatwell-menu-462045.md). Nothing is invented.
+   ========================================================================== */
+
+/* Cross-document transitions. Pure CSS, no router. Makes flipping between
+   Option A and Option B feel like one product rather than four HTML files. */
+@view-transition { navigation: none; }
+@media (prefers-reduced-motion: no-preference) {
+  @view-transition { navigation: auto; }
+}
+
+:root{
+  /* One hue ramp — warm brass on warm near-black. No second hue anywhere. */
+  --ink-950:#0a0908;
+  --ink-900:#100e0c;
+  --ink-850:#171411;
+  --ink-800:#1f1b17;
+
+  --paper:#f4f0e9;
+  --paper-80:rgba(244,240,233,.80);
+  --paper-58:rgba(244,240,233,.58);
+  --paper-38:rgba(244,240,233,.38);
+
+  --brass:#c19a5b;
+  --brass-lo:#a07c42;
+  --brass-hi:#dcc094;
+
+  --line:rgba(244,240,233,.13);
+  --line-strong:rgba(244,240,233,.26);
+
+  /* Two speeds. Functional response vs expressive movement. That's the system. */
+  --t-fn:150ms;
+  --t-ex:500ms;
+  --ease:cubic-bezier(.22,1,.36,1);
+  --ease-inout:cubic-bezier(.65,0,.35,1);
+
+  --wrap:1240px;
+  --gut:clamp(1.25rem,5vw,4.5rem);
+  --header-h:72px;
+}
+
 *{box-sizing:border-box}
-body{margin:0;background:var(--ink);color:var(--paper);
-  font-family:Inter,-apple-system,BlinkMacSystemFont,sans-serif;line-height:1.6;
-  -webkit-font-smoothing:antialiased;min-height:100vh;display:flex;flex-direction:column}
-a{color:inherit}
-.wrap{max-width:1040px;margin:0 auto;padding:0 24px;width:100%}
-header{padding:26px 0;border-bottom:1px solid var(--line)}
-.back{font-size:.85rem;color:var(--mute);text-decoration:none}
-.back:hover{color:var(--paper)}
-main{flex:1;padding:clamp(56px,9vw,110px) 0}
-.kicker{font-size:.7rem;letter-spacing:.22em;text-transform:uppercase;color:var(--gold);font-weight:600}
-h1{font-family:Fraunces,Georgia,serif;font-weight:600;font-size:clamp(2.2rem,6vw,3.8rem);
-  line-height:1.08;margin:14px 0 18px;letter-spacing:-.015em}
-.sub{color:var(--mute);max-width:56ch;font-size:1.05rem;margin-bottom:52px}
-h2{font-family:Fraunces,serif;font-weight:600;font-size:1.3rem;margin:0 0 18px}
-.cols{display:grid;gap:44px}
-@media(min-width:860px){.cols{grid-template-columns:1fr 1fr;gap:64px}}
-ul{list-style:none;margin:0;padding:0;font-size:.95rem;color:var(--mute)}
-li{padding:9px 0 9px 22px;position:relative;border-bottom:1px solid rgba(247,244,239,.08)}
-li::before{content:"";position:absolute;left:0;top:19px;width:8px;height:1px;background:var(--gold)}
-li b{color:var(--paper);font-weight:600}
-.note{margin-top:56px;padding:24px 26px;border:1px solid var(--line);border-radius:6px;
-  font-size:.92rem;color:var(--mute);max-width:70ch}
-.note b{color:var(--paper)}
-footer{border-top:1px solid var(--line);padding:22px 0 30px;font-size:.78rem;color:var(--mute)}
+html{
+  -webkit-text-size-adjust:100%;
+  /* clip, not hidden — `hidden` here would kill every sticky on the page */
+  overflow-x:clip;
+}
+@media (prefers-reduced-motion: no-preference){ html{scroll-behavior:smooth} }
+
+body{
+  margin:0;background:var(--ink-950);color:var(--paper);
+  font-family:Inter,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+  /* 17px, not 16. A salon page is a reading interface — people actually read
+     the menu — and every premium reference in the research sits at 17–20. */
+  font-size:17px;font-weight:400;line-height:1.6;
+  -webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;
+  overflow-x:clip;
+}
+img{max-width:100%;display:block}
+a{color:inherit;text-decoration:none}
+button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
+:focus-visible{outline:2px solid var(--brass);outline-offset:3px;border-radius:2px}
+
+.wrap{max-width:var(--wrap);margin:0 auto;padding-inline:var(--gut);width:100%}
+
+.visually-hidden:not(:focus):not(:active){
+  clip-path:inset(50%);height:1px;width:1px;overflow:hidden;
+  position:absolute;white-space:nowrap
+}
+
+/* ---------- Typography: three roles, never a font collection ---------- */
+/* display serif */
+h1,h2,.display{
+  font-family:"Bodoni Moda",Didot,"Bodoni MT",Georgia,serif;
+  font-weight:400;line-height:.94;letter-spacing:-.02em;margin:0;
+  font-optical-sizing:auto;
+}
+h1{font-size:clamp(3.2rem,11.5vw,10.5rem)}
+h2{font-size:clamp(2.4rem,6.6vw,5.6rem)}
+h3{font-family:Inter,sans-serif;font-size:1.02rem;font-weight:600;letter-spacing:-.01em;margin:0;line-height:1.3}
+
+/* mono — metadata only: labels, durations, prices, counts */
+.mono,.eyebrow,.price,.dur,.stat__num,.rating{
+  font-family:"IBM Plex Mono",ui-monospace,SFMono-Regular,Menlo,monospace;
+  font-variant-numeric:tabular-nums;
+  font-feature-settings:'tnum' 1;
+}
+.eyebrow{
+  font-size:.68rem;letter-spacing:.22em;text-transform:uppercase;
+  color:var(--brass);font-weight:500;margin:0 0 1.1rem;display:block
+}
+.lead{font-size:clamp(1.02rem,1.5vw,1.22rem);color:var(--paper-58);max-width:46ch;line-height:1.55}
+
+section{padding-block:clamp(5rem,13vw,11rem);position:relative}
+
+/* ---------- Buttons ---------- */
+.btn{
+  display:inline-flex;align-items:center;justify-content:center;gap:.6em;
+  padding:1.15em 2.2em;border-radius:100px;font-size:.94rem;font-weight:500;
+  letter-spacing:.01em;background:var(--brass);color:var(--ink-950);
+  transition:background var(--t-fn) ease,transform var(--t-fn) ease;
+  border:1px solid var(--brass);
+}
+.btn:hover{background:var(--brass-hi);border-color:var(--brass-hi)}
+.btn:active{transform:translateY(1px)}
+.btn--ghost{background:none;color:var(--paper);border-color:var(--line-strong)}
+.btn--ghost:hover{background:rgba(244,240,233,.06);border-color:var(--paper-38)}
+
+/* ============================ HEADER ============================ */
+.hdr{
+  position:fixed;inset:0 0 auto 0;z-index:900;height:var(--header-h);
+  display:flex;align-items:center;
+  transition:background var(--t-ex) ease,border-color var(--t-ex) ease,
+             backdrop-filter var(--t-ex) ease;
+  border-bottom:1px solid transparent;
+}
+.hdr[data-stuck]{
+  background:rgba(10,9,8,.86);border-bottom-color:var(--line);
+  -webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px);
+}
+.hdr__in{display:flex;align-items:center;gap:1.5rem;width:100%}
+.brand{font-family:"Bodoni Moda",Georgia,serif;font-size:1.28rem;letter-spacing:-.015em;white-space:nowrap}
+.brand b{font-weight:600}
+.hdr nav{margin-left:auto;display:flex;align-items:center;gap:2rem}
+.hdr nav a:not(.btn){
+  font-size:.86rem;color:var(--paper-58);transition:color var(--t-fn) ease;
+  position:relative;padding-block:.4rem
+}
+.hdr nav a:not(.btn):hover{color:var(--paper)}
+.hdr nav a:not(.btn)::after{
+  content:"";position:absolute;left:0;right:0;bottom:0;height:1px;
+  background:var(--brass);scale:0 1;transform-origin:left;
+  transition:scale var(--t-ex) var(--ease)
+}
+.hdr nav a:not(.btn):hover::after{scale:1 1}
+.hdr .btn{padding:.72em 1.5em;font-size:.84rem}
+@media(max-width:900px){ .hdr nav a:not(.btn){display:none} }
+
+/* ============================ HERO ============================ */
+.hero{
+  min-height:100svh;padding:0;display:grid;align-items:end;
+  position:relative;overflow:clip;isolation:isolate;
+}
+.hero__media{position:absolute;inset:0;z-index:-2;overflow:clip}
+.hero__media picture{display:contents}
+.hero__media img{width:100%;height:100%;object-fit:cover;object-position:50% 42%}
+@media(max-width:700px){ .hero__media img{object-position:50% 28%} }
+/* Headroom so the parallax translate can't expose an edge.
+   1 + offset*2/100, with offset = 7. NO will-change here — it pins the raster
+   and a scaled-up image goes permanently soft. */
+.hero__media img{scale:1.14}
+.hero::after{
+  content:"";position:absolute;inset:0;z-index:-1;pointer-events:none;
+  /* Two scrims, not one. The vertical ramp seats the copy; the horizontal one
+     darkens the left third so display type never lands on the lit shopfront
+     window. Without it the headline fights the signage behind it. */
+  background:
+    linear-gradient(to right,rgba(10,9,8,.82) 0%,rgba(10,9,8,.34) 46%,rgba(10,9,8,0) 78%),
+    linear-gradient(to top,rgba(10,9,8,.96) 0%,rgba(10,9,8,.78) 26%,rgba(10,9,8,.34) 60%,rgba(10,9,8,.62) 100%);
+}
+.hero__in{padding-block:clamp(3rem,8vh,6rem) clamp(3rem,9vh,7rem)}
+.hero h1{margin-block:.5rem 1.6rem;max-width:14ch}
+.hero__sub{font-size:clamp(1rem,1.55vw,1.28rem);color:var(--paper-80);max-width:40ch;margin:0 0 2.4rem;line-height:1.5}
+.hero__cta{display:flex;flex-wrap:wrap;gap:.9rem;align-items:center}
+.hero__meta{
+  margin-top:1.9rem;display:flex;flex-wrap:wrap;gap:.6rem 1.4rem;
+  font-size:.76rem;letter-spacing:.06em;color:var(--paper-58)
+}
+.hero__meta b{color:var(--paper);font-weight:500}
+.dot{color:var(--brass)}
+
+/* Masked line reveal — used on the H1 only. The mask lives on .line, whose
+   padding-bottom enlarges the CLIP box so descenders (g y p q) aren't sheared.
+   The equal negative margin takes that space back out of flow. */
+.line{--overshoot:.30em;display:block;overflow:clip;
+  padding-block-end:var(--overshoot);margin-block-end:calc(var(--overshoot) * -1)}
+.line__inner{display:block;translate:0 0}
+
+@media (prefers-reduced-motion: no-preference){
+  .line__inner{
+    animation:line-rise 1s var(--ease) both;
+    animation-delay:calc(var(--i,0) * 110ms + 120ms)
+  }
+  .hero__sub,.hero__cta,.hero__meta,.hero .eyebrow{
+    animation:soft-rise .9s var(--ease) both;
+    animation-delay:calc(var(--d,0) * 90ms + 460ms)
+  }
+}
+@keyframes line-rise{from{translate:0 calc(100% + var(--overshoot))}}
+@keyframes soft-rise{from{opacity:0;translate:0 1rem}}
+
+/* Hero parallax — compositor-only, and it scrubs with scroll rather than
+   fighting it. Firefox ignores this and gets a static 1.14 crop, which is fine. */
+@media (prefers-reduced-motion: no-preference){
+  @supports ((animation-timeline: view()) and (animation-range: 0% 100%)){
+    .hero{view-timeline:--hero block}
+    .hero__media img{
+      animation:hero-par linear both;
+      animation-timeline:--hero;
+      animation-range:cover;
+    }
+  }
+}
+@keyframes hero-par{from{translate:0 -7%}to{translate:0 7%}}
+
+.scrollcue{
+  position:absolute;left:50%;bottom:1.6rem;translate:-50% 0;z-index:2;
+  font-family:"IBM Plex Mono",monospace;font-size:.6rem;letter-spacing:.24em;
+  text-transform:uppercase;color:var(--paper-38);display:flex;
+  flex-direction:column;align-items:center;gap:.6rem
+}
+.scrollcue i{display:block;width:1px;height:34px;background:linear-gradient(var(--brass),transparent)}
+@media (prefers-reduced-motion: no-preference){
+  .scrollcue i{animation:cue 2.4s var(--ease-inout) infinite}
+}
+@keyframes cue{0%,100%{opacity:.25;scale:1 .5}50%{opacity:1;scale:1 1}}
+@media(max-width:700px){.scrollcue{display:none}}
+
+/* ==================== PRICE TEASER ====================
+   Duck & Dry's move: real numbers above the fold-plus-one. Not one other
+   premium salon site in the reference set does this. */
+.teaser{padding-block:0;margin-top:-1px;background:var(--ink-900);border-block:1px solid var(--line)}
+.teaser__in{
+  display:grid;grid-template-columns:repeat(4,1fr);
+  border-inline-start:1px solid var(--line)
+}
+.tz{padding:clamp(1.6rem,3.4vw,2.6rem) clamp(1rem,2vw,1.8rem);
+  border-inline-end:1px solid var(--line);display:flex;flex-direction:column;gap:.35rem}
+.tz span{font-size:.68rem;letter-spacing:.16em;text-transform:uppercase;color:var(--paper-38)}
+.tz b{font-family:"Bodoni Moda",Georgia,serif;font-weight:400;font-size:clamp(1.6rem,3.4vw,2.5rem);letter-spacing:-.02em;line-height:1}
+.tz b i{font-style:normal;font-size:.46em;color:var(--paper-38);letter-spacing:.02em}
+.teaser__more{
+  grid-column:1/-1;border-inline-end:1px solid var(--line);border-top:1px solid var(--line);
+  padding:1.15rem clamp(1rem,2vw,1.8rem);display:flex;justify-content:space-between;
+  align-items:center;gap:1rem;font-size:.84rem;color:var(--paper-58);
+  transition:background var(--t-fn) ease,color var(--t-fn) ease
+}
+.teaser__more:hover{background:rgba(244,240,233,.04);color:var(--paper)}
+.teaser__more em{font-style:normal;color:var(--brass)}
+@media(max-width:820px){
+  .teaser__in{grid-template-columns:repeat(2,1fr)}
+  .tz{border-block-end:1px solid var(--line)}
+}
+
+/* ==================== REVEAL PRIMITIVE ====================
+   Three tiers. Default is finished and visible — that's the whole safety story. */
+.reveal{opacity:1;translate:none}
+
+@media (prefers-reduced-motion: no-preference){
+  /* Tier 1 — class toggle, driven by IntersectionObserver. Works in Firefox. */
+  .js .reveal{
+    opacity:0;translate:0 1.6rem;
+    transition:opacity .7s ease-out,translate 1s var(--ease);
+    transition-delay:calc(var(--i,0) * 70ms)
+  }
+  .js .reveal.is-in{opacity:1;translate:0 0}
+
+  /* Tier 2 — native scroll-driven. Supersedes tier 1, needs no JS at all.
+     The opacity/translate reset is load-bearing: `reveal-rise` has no `to`
+     keyframe, so its end value is taken from the base style. Leave tier 1's
+     `opacity:0` standing and the animation runs 0 -> 0 and nothing ever
+     appears. Undo the hidden state here, always. */
+  @supports ((animation-timeline: view()) and (animation-range: 0% 100%)){
+    .js .reveal,.reveal{
+      opacity:1;translate:none;
+      transition:none;
+      animation:reveal-rise linear both;
+      animation-timeline:view();
+      animation-range:entry 6% cover 34%;
+    }
+  }
+}
+@keyframes reveal-rise{from{opacity:0;translate:0 1.6rem}}
+
+@media (prefers-reduced-motion: reduce){
+  .reveal{animation:none!important;transition:none!important;opacity:1;translate:none}
+}
+
+/* ==================== THE SPLIT (pinned) ==================== */
+.split{background:var(--ink-900)}
+.split__grid{display:grid;grid-template-columns:1fr 1fr;gap:clamp(2rem,6vw,6rem);align-items:start}
+.split__media{
+  position:sticky;top:var(--header-h);height:calc(100svh - var(--header-h));
+  display:grid;align-content:center;overflow:clip
+}
+/* Frames stack in one grid cell. The first is the base layer and stays put;
+   later ones fade in ON TOP of it. Crossfading each pair in and out instead
+   leaves a gap between steps where nothing is opaque and the panel flashes
+   black — stacking cannot do that. */
+.split__frame{grid-area:1/1;width:100%;aspect-ratio:4/5;object-fit:cover;border-radius:2px}
+.split__frame:not(:first-of-type){opacity:0}
+.split__step{min-height:82svh;display:grid;align-content:center;padding-block:2rem}
+.split__step h3{
+  font-family:"Bodoni Moda",Georgia,serif;font-weight:400;
+  font-size:clamp(2rem,3.6vw,3.2rem);letter-spacing:-.02em;line-height:1;margin-bottom:1.1rem
+}
+.split__step p{color:var(--paper-58);max-width:38ch;margin:0 0 1.4rem}
+.split__tags{display:flex;flex-wrap:wrap;gap:.5rem}
+.tag{
+  font-family:"IBM Plex Mono",monospace;font-size:.68rem;letter-spacing:.1em;
+  text-transform:uppercase;color:var(--paper-58);
+  border:1px solid var(--line);border-radius:100px;padding:.42em 1em
+}
+
+@media (prefers-reduced-motion: no-preference){
+  @supports ((animation-timeline: view()) and (animation-range: 0% 100%)){
+    .split__grid{timeline-scope:--pin}
+    .split__copy{view-timeline:--pin block}
+    /* Each later frame fades in over the second half of the preceding step,
+       then holds. `both` keeps it opaque for the rest of the scroll. */
+    .split__frame:not(:first-of-type){
+      animation:frame-in linear both;
+      animation-timeline:--pin;
+      animation-range:contain calc((var(--n) - .55) / var(--steps) * 100%)
+                      contain calc((var(--n) - .05) / var(--steps) * 100%);
+    }
+  }
+}
+@keyframes frame-in{from{opacity:0}to{opacity:1}}
+
+@media(max-width:900px){
+  .split__grid{display:block}
+  .split__media{position:static;height:auto;margin-bottom:2.5rem}
+  .split__frame{opacity:1;animation:none!important}
+  .split__frame:not(:first-of-type){display:none}
+  .split__step{min-height:0;padding-block:1.5rem}
+}
+@media (prefers-reduced-motion: reduce){
+  .split__grid{display:block}
+  .split__media{position:static;height:auto;margin-bottom:2.5rem}
+  .split__frame{animation:none!important}
+  .split__frame:not(:first-of-type){display:none}
+  .split__step{min-height:0}
+}
+
+/* ==================== SERVICES ==================== */
+.svc__head{display:flex;flex-wrap:wrap;gap:2rem;justify-content:space-between;align-items:end;margin-bottom:clamp(2.5rem,5vw,4rem)}
+.acc{border-top:1px solid var(--line)}
+.acc details{border-bottom:1px solid var(--line)}
+.acc summary{
+  list-style:none;cursor:pointer;padding:1.5rem 0;display:flex;
+  align-items:baseline;gap:1.2rem;transition:color var(--t-fn) ease
+}
+.acc summary::-webkit-details-marker{display:none}
+.acc summary:hover{color:var(--brass-hi)}
+.acc summary h3{
+  font-family:"Bodoni Moda",Georgia,serif;font-weight:400;
+  font-size:clamp(1.35rem,2.5vw,2rem);letter-spacing:-.02em;flex:1;line-height:1.1
+}
+.acc .count{font-size:.72rem;letter-spacing:.14em;color:var(--paper-38)}
+.acc .chev{
+  width:11px;height:11px;border-right:1px solid currentColor;border-bottom:1px solid currentColor;
+  rotate:45deg;translate:0 -3px;transition:rotate var(--t-ex) var(--ease);flex:none;opacity:.6
+}
+details[open] .chev{rotate:225deg;translate:0 2px}
+.acc__body{padding-bottom:1.6rem}
+.srow{
+  display:grid;grid-template-columns:1fr auto auto;gap:.6rem 1.6rem;
+  align-items:baseline;padding:.85rem 0;border-top:1px solid var(--line)
+}
+.srow:first-child{border-top:0}
+.srow__n{font-size:1rem;font-weight:450;letter-spacing:-.005em}
+.srow__n em{font-style:normal;color:var(--paper-38);font-size:.84em;margin-left:.5em}
+.srow__d{font-size:.8rem;color:var(--paper-38);letter-spacing:.03em;white-space:nowrap}
+.srow__p{font-size:.98rem;color:var(--paper);white-space:nowrap;text-align:right;min-width:5.5ch}
+.srow__p i{font-style:normal;color:var(--paper-38);font-size:.78em;margin-right:.3em}
+.srow__say{grid-column:1/-1;font-size:.88rem;color:var(--paper-58);max-width:56ch;margin:.1rem 0 0}
+.svc__note{
+  margin-top:2.2rem;padding:1.3rem 1.5rem;border:1px solid var(--line);border-radius:3px;
+  font-size:.86rem;color:var(--paper-58);max-width:64ch
+}
+.svc__note b{color:var(--paper);font-weight:500}
+@media(max-width:560px){
+  .srow{grid-template-columns:1fr auto}
+  .srow__d{grid-column:1;font-size:.75rem}
+  .srow__p{grid-row:1;grid-column:2}
+}
+
+/* ==================== BOOKING ==================== */
+.book{background:var(--ink-900)}
+.book__shell{
+  margin-top:clamp(2.5rem,5vw,4rem);border:1px solid var(--line);border-radius:4px;
+  background:var(--ink-850);overflow:clip
+}
+.steps{display:flex;border-bottom:1px solid var(--line)}
+.steps li{
+  flex:1;list-style:none;padding:1rem .8rem;text-align:center;
+  font-family:"IBM Plex Mono",monospace;font-size:.68rem;letter-spacing:.14em;
+  text-transform:uppercase;color:var(--paper-38);border-inline-end:1px solid var(--line);
+  transition:color var(--t-fn) ease,background var(--t-fn) ease
+}
+.steps li:last-child{border-inline-end:0}
+.steps li[data-on]{color:var(--ink-950);background:var(--brass)}
+.steps li[data-done]{color:var(--brass)}
+.book__pane{padding:clamp(1.4rem,3vw,2.4rem);min-height:340px}
+.book__pane[hidden]{display:none}
+.book__q{font-size:.98rem;color:var(--paper-58);margin:0 0 1.4rem}
+.chips{display:flex;flex-wrap:wrap;gap:.5rem}
+.chip{
+  border:1px solid var(--line);border-radius:100px;padding:.6em 1.15em;font-size:.86rem;
+  color:var(--paper-58);transition:border-color var(--t-fn) ease,color var(--t-fn) ease,background var(--t-fn) ease
+}
+.chip:hover{border-color:var(--paper-38);color:var(--paper)}
+.chip[aria-pressed="true"]{background:var(--brass);border-color:var(--brass);color:var(--ink-950);font-weight:500}
+.opts{display:grid;gap:.4rem;max-height:330px;overflow-y:auto;margin-top:1.2rem;padding-right:.4rem}
+.opt{
+  display:grid;grid-template-columns:1fr auto auto;gap:.4rem 1.2rem;align-items:baseline;
+  text-align:left;width:100%;padding:.8rem .9rem;border:1px solid var(--line);border-radius:3px;
+  transition:border-color var(--t-fn) ease,background var(--t-fn) ease
+}
+.opt:hover{border-color:var(--paper-38);background:rgba(244,240,233,.03)}
+.opt[aria-pressed="true"]{border-color:var(--brass);background:rgba(193,154,91,.1)}
+.opt__n{font-size:.94rem}
+.opt__n em{font-style:normal;color:var(--paper-38);font-size:.84em;margin-left:.4em}
+.opt__d,.opt__p{font-family:"IBM Plex Mono",monospace;font-variant-numeric:tabular-nums;font-size:.82rem}
+.opt__d{color:var(--paper-38)}
+.opt__sub{grid-column:1/-1;font-size:.78rem;color:var(--paper-38);margin-top:.15rem}
+.days{display:flex;gap:.45rem;overflow-x:auto;padding-bottom:.5rem}
+.day{
+  flex:none;min-width:64px;text-align:center;border:1px solid var(--line);border-radius:3px;
+  padding:.7rem .5rem;transition:border-color var(--t-fn) ease,background var(--t-fn) ease
+}
+.day:hover{border-color:var(--paper-38)}
+.day[aria-pressed="true"]{border-color:var(--brass);background:rgba(193,154,91,.1)}
+.day span{display:block;font-size:.66rem;letter-spacing:.1em;text-transform:uppercase;color:var(--paper-38)}
+.day b{display:block;font-family:"IBM Plex Mono",monospace;font-size:1.05rem;font-weight:500;margin-top:.2rem}
+.day[data-shut]{opacity:.3;pointer-events:none}
+.times{display:grid;grid-template-columns:repeat(auto-fill,minmax(84px,1fr));gap:.45rem;margin-top:1.3rem}
+.time{
+  border:1px solid var(--line);border-radius:3px;padding:.65rem .4rem;text-align:center;
+  font-family:"IBM Plex Mono",monospace;font-variant-numeric:tabular-nums;font-size:.88rem;
+  transition:border-color var(--t-fn) ease,background var(--t-fn) ease
+}
+.time:hover{border-color:var(--paper-38)}
+.time[aria-pressed="true"]{border-color:var(--brass);background:var(--brass);color:var(--ink-950);font-weight:500}
+.time[data-gone]{opacity:.24;text-decoration:line-through;pointer-events:none}
+.summary{display:grid;gap:.7rem;margin-bottom:1.6rem}
+.summary div{display:flex;justify-content:space-between;gap:1.5rem;padding-bottom:.7rem;border-bottom:1px solid var(--line)}
+.summary dt{color:var(--paper-38);font-size:.84rem}
+.summary dd{margin:0;text-align:right;font-size:.94rem}
+.summary .tot dd{font-family:"IBM Plex Mono",monospace;font-variant-numeric:tabular-nums;font-size:1.15rem;color:var(--brass)}
+.book__foot{display:flex;flex-wrap:wrap;gap:.7rem;align-items:center;justify-content:space-between;
+  padding:1.1rem clamp(1.4rem,3vw,2.4rem);border-top:1px solid var(--line);background:var(--ink-900)}
+.book__back{font-size:.84rem;color:var(--paper-38);transition:color var(--t-fn) ease}
+.book__back:hover{color:var(--paper)}
+.book__back[hidden]{visibility:hidden;display:block}
+.done{text-align:center;padding:2rem 0}
+.done__tick{
+  width:56px;height:56px;border-radius:50%;border:1px solid var(--brass);
+  display:grid;place-items:center;margin:0 auto 1.4rem;color:var(--brass);font-size:1.4rem
+}
+.done h3{font-family:"Bodoni Moda",Georgia,serif;font-weight:400;font-size:clamp(1.8rem,3.4vw,2.6rem);letter-spacing:-.02em;margin-bottom:.7rem}
+.demo-note{
+  margin-top:1.4rem;font-size:.74rem;color:var(--paper-38);letter-spacing:.02em;
+  border-top:1px solid var(--line);padding-top:1rem
+}
+
+/* ==================== WORK CAROUSEL ==================== */
+.work__track{
+  display:flex;gap:clamp(.8rem,1.6vw,1.4rem);margin:clamp(2.5rem,5vw,4rem) 0 0;
+  padding-inline:var(--gut);list-style:none;
+  overflow-x:auto;overflow-y:hidden;overscroll-behavior-inline:contain;
+  scroll-snap-type:inline proximity;scroll-padding-inline:var(--gut);
+  scrollbar-width:none;will-change:scroll-position
+}
+.work__track::-webkit-scrollbar{display:none}
+@media (prefers-reduced-motion: no-preference){ .work__track{scroll-behavior:smooth} }
+.work__slide{flex:0 0 clamp(240px,26vw,340px);scroll-snap-align:start;min-inline-size:0}
+.work__slide figure{margin:0}
+.work__slide img{width:100%;aspect-ratio:3/4;object-fit:cover;border-radius:2px;background:var(--ink-800)}
+.work__slide figcaption{margin-top:.85rem;font-size:.84rem;color:var(--paper-58);max-width:32ch}
+.work__ctl{display:flex;gap:.5rem;margin-top:1.8rem}
+.work__ctl[hidden]{display:none}
+.work__ctl button{
+  width:44px;height:44px;border:1px solid var(--line);border-radius:50%;
+  display:grid;place-items:center;transition:border-color var(--t-fn) ease,background var(--t-fn) ease
+}
+.work__ctl button:hover{border-color:var(--paper-38);background:rgba(244,240,233,.05)}
+.work__ctl button[aria-disabled="true"]{opacity:.28}
+
+/* ==================== TEAM ==================== */
+.team__grid{display:grid;gap:1px;background:var(--line);border:1px solid var(--line);
+  grid-template-columns:repeat(auto-fit,minmax(230px,1fr));margin-top:clamp(2.5rem,5vw,4rem)}
+.mem{background:var(--ink-950);padding:1.9rem 1.6rem;display:flex;flex-direction:column;gap:.55rem;
+  transition:background var(--t-ex) ease}
+.mem:hover{background:var(--ink-850)}
+.mem__mono{
+  font-family:"Bodoni Moda",Georgia,serif;font-size:2.6rem;line-height:1;color:var(--brass);
+  opacity:.34;margin-bottom:.4rem
+}
+.mem h3{font-size:1.16rem;font-weight:500;letter-spacing:-.01em}
+.mem__role{font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;color:var(--paper-38)}
+.rating{font-size:.82rem;color:var(--brass);letter-spacing:.02em}
+.rating i{font-style:normal;color:var(--paper-38)}
+.mem p{font-size:.85rem;color:var(--paper-58);margin:.4rem 0 0;line-height:1.5}
+
+/* ==================== PROOF ==================== */
+.proof{background:var(--ink-900)}
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--line);
+  border:1px solid var(--line);margin:clamp(2.5rem,5vw,4rem) 0 0;padding:0}
+.stat{background:var(--ink-900);padding:2rem 1.4rem;margin:0;text-align:center}
+.stat__value{margin:0}
+.stat__num{
+  display:inline-block;font-family:"Bodoni Moda",Georgia,serif;font-weight:400;
+  font-size:clamp(2.4rem,5.2vw,4rem);letter-spacing:-.02em;line-height:1;
+  contain:layout style paint;white-space:nowrap
+}
+.stat__label{font-size:.68rem;letter-spacing:.16em;text-transform:uppercase;color:var(--paper-38);margin-top:.7rem}
+@media(max-width:760px){.stats{grid-template-columns:repeat(2,1fr)}}
+
+.revs{display:grid;gap:1.4rem;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));margin-top:2.5rem}
+.rev{border:1px solid var(--line);border-radius:3px;padding:1.6rem;display:flex;flex-direction:column;gap:.9rem}
+.rev__stars{color:var(--brass);letter-spacing:.18em;font-size:.82rem}
+.rev p{margin:0;font-size:.95rem;color:var(--paper-80);line-height:1.6}
+.rev__who{font-family:"IBM Plex Mono",monospace;font-size:.74rem;color:var(--paper-38);letter-spacing:.04em;margin-top:auto}
+
+/* ==================== VISIT ==================== */
+.visit__grid{display:grid;gap:clamp(2rem,5vw,4.5rem);grid-template-columns:1fr 1fr;align-items:start;margin-top:clamp(2rem,4vw,3rem)}
+.hours{border-top:1px solid var(--line)}
+.hours div{display:flex;justify-content:space-between;gap:1.5rem;padding:.72rem 0;border-bottom:1px solid var(--line);font-size:.92rem}
+.hours dt{color:var(--paper-58)}
+.hours dd{margin:0;font-family:"IBM Plex Mono",monospace;font-variant-numeric:tabular-nums;font-size:.88rem}
+.hours div[data-today] dt,.hours div[data-today] dd{color:var(--brass)}
+.addr{font-size:1.02rem;line-height:1.75;color:var(--paper-80)}
+.addr a{border-bottom:1px solid var(--line-strong);transition:border-color var(--t-fn) ease}
+.addr a:hover{border-color:var(--brass)}
+@media(max-width:820px){.visit__grid{grid-template-columns:1fr}}
+
+/* ==================== FOOTER ==================== */
+footer{border-top:1px solid var(--line);padding-block:3rem 5rem;font-size:.8rem;color:var(--paper-38)}
+.foot__in{display:flex;flex-wrap:wrap;gap:1rem 2rem;justify-content:space-between;align-items:center}
+footer a:hover{color:var(--paper)}
+
+/* Reduced motion — remove movement, keep opacity. Also undo the line mask,
+   which is pure risk once nothing animates. */
+@media (prefers-reduced-motion: reduce){
+  *,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;
+    transition-duration:.01ms!important;scroll-behavior:auto!important}
+  .line{overflow:visible;padding-block-end:0;margin-block-end:0}
+  .line__inner{translate:none}
+  .hero__media img{scale:1;animation:none}
+}
 </style>
 </head>
 <body>
 
-<header>
-  <div class="wrap"><a class="back" href="../" data-tier-link>&larr; Both options</a></div>
+<header class="hdr" id="hdr">
+  <div class="wrap hdr__in">
+    <a class="brand" href="#top"><b>HK</b>. Hair Studio</a>
+    <nav>
+      <a href="#split">The salon</a>
+      <a href="#services">Prices</a>
+      <a href="#work">Work</a>
+      <a href="#team">Team</a>
+      <a href="#visit">Visit</a>
+      <a class="btn" href="#book">Book</a>
+    </nav>
+  </div>
 </header>
+
+<!-- ============================ HERO ============================ -->
+<section class="hero" id="top">
+  <div class="hero__media">
+    <!-- Cover-cropping the 1.74:1 shopfront on a phone loses the illuminated
+         sign entirely, which is the whole point of the shot. Portrait crop
+         below 700px, recomposed around the door. -->
+    <picture>
+      <source media="(max-width: 700px)" srcset="../assets/img/hq/hero-shopfront-portrait.jpg" width="1200" height="1470">
+      <img src="../assets/img/hq/hero-shopfront.jpg" alt="HK Hair Studio on Perne Road, Cambridge, lit at dusk"
+           width="2400" height="1379" fetchpriority="high" decoding="async">
+    </picture>
+  </div>
+
+  <div class="wrap hero__in">
+    <span class="eyebrow" style="--d:0">Perne Road · Cambridge</span>
+    <h1>
+      <span class="line" style="--i:0"><span class="line__inner">Two crafts.</span></span>
+      <span class="line" style="--i:1"><span class="line__inner">One address.</span></span>
+    </h1>
+    <p class="hero__sub" style="--d:1">A hairdressing salon and a Turkish barbershop, sharing a room on Perne Road — and a 4.9 from 357 people who've sat in both.</p>
+    <div class="hero__cta" style="--d:2">
+      <a class="btn" href="#book">Book an appointment</a>
+      <a class="btn btn--ghost" href="#services">See all 43 services</a>
+    </div>
+    <p class="hero__meta" style="--d:3">
+      <span><b id="openNow">Open today until 19:00</b></span>
+      <span class="dot">·</span>
+      <span>4.89 ★ from 357 verified reviews</span>
+      <span class="dot">·</span>
+      <span><a href="tel:01223694812"><b>01223 694 812</b></a></span>
+    </p>
+  </div>
+
+  <div class="scrollcue" aria-hidden="true"><i></i>Scroll</div>
+</section>
+
+<!-- ==================== PRICE TEASER ==================== -->
+<section class="teaser" aria-label="Prices at a glance">
+  <div class="wrap" style="padding-inline:0">
+    <div class="teaser__in">
+      <div class="tz"><span>Men's cut</span><b><i>from</i> £20</b></div>
+      <div class="tz"><span>Skin fade</span><b><i>from</i> £23</b></div>
+      <div class="tz"><span>Ladies' cut</span><b><i>from</i> £30</b></div>
+      <div class="tz"><span>Balayage</span><b><i>from</i> £180</b></div>
+      <a class="teaser__more" href="#services">
+        <span>Every price here is the price in the diary. No “call for a quote”.</span>
+        <em>All 43 services &rarr;</em>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== THE SPLIT ==================== -->
+<section class="split" id="split">
+  <div class="wrap">
+    <span class="eyebrow reveal">One roof, two rooms</span>
+    <h2 class="reveal" style="max-width:12ch">Turn left, or turn right.</h2>
+    <p class="lead reveal" style="margin-top:1.6rem">Their own window says it better than we could: <em>men to the left, because women are always right.</em> Two teams, two crafts, one till.</p>
+
+    <div class="split__grid" style="--steps:3;margin-top:clamp(3rem,7vw,6rem)">
+      <div class="split__media">
+        <img class="split__frame" style="--n:0" src="../assets/img/hq/ladies-arches.jpg" alt="The hairdressing floor, arch mirrors and styling stations" loading="lazy" width="1206" height="797">
+        <img class="split__frame" style="--n:1" src="../assets/img/hq/barber-wood.jpg" alt="The barber side, marble tops and leather chairs" loading="lazy" width="1206" height="814">
+        <img class="split__frame" style="--n:2" src="../assets/img/hq/interior-wide.jpg" alt="Both halves of the salon seen from the door" loading="lazy" width="1021" height="1020">
+      </div>
+
+      <div class="split__copy">
+        <article class="split__step">
+          <h3>The salon</h3>
+          <p>Colour, cutting, extensions and treatments. Three hairdressers with 157 reviews between them. Balayage takes three and a half hours and we won't pretend otherwise.</p>
+          <div class="split__tags"><span class="tag">Balayage</span><span class="tag">Highlights</span><span class="tag">Olaplex</span><span class="tag">Extensions</span><span class="tag">Hair up</span></div>
+        </article>
+        <article class="split__step">
+          <h3>The barbershop</h3>
+          <p>Turkish barbering, done the long way. Fades, beard work, hot towels, wet shaves. Four barbers — and a £3 wash if five minutes is all you've got.</p>
+          <div class="split__tags"><span class="tag">Skin fade</span><span class="tag">Hot towel</span><span class="tag">Wet shave</span><span class="tag">Beard</span><span class="tag">Kids</span></div>
+        </article>
+        <article class="split__step">
+          <h3>One diary</h3>
+          <p>Whichever way you turn, it's the same booking, the same counter and the same standard. Twenty men's services, twenty-three on the salon side, and nobody waiting on the wrong side of the room.</p>
+          <div class="split__tags"><span class="tag">Open 7 days</span><span class="tag">Cash &amp; card</span><span class="tag">4.89 ★</span></div>
+        </article>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== SERVICES ==================== -->
+<section id="services">
+  <div class="wrap">
+    <div class="svc__head">
+      <div>
+        <span class="eyebrow reveal">The menu</span>
+        <h2 class="reveal" style="max-width:10ch">Every price, in full.</h2>
+      </div>
+      <p class="lead reveal" style="max-width:34ch">Forty-three services. Where it says <em>from</em>, the price depends on length or thickness and we'll confirm before we start.</p>
+    </div>
+    <div class="acc reveal" id="acc"></div>
+    <p class="svc__note reveal">
+      <b>Patch test:</b> colour, highlights, keratin and Brazilian blowdry need one at least 48 hours before your appointment.
+      <b>Not sure?</b> The £1 consultation exists so nobody guesses — book that first and we'll work it out together.
+    </p>
+  </div>
+</section>
+
+<!-- ==================== BOOKING ==================== -->
+<section class="book" id="book">
+  <div class="wrap">
+    <span class="eyebrow reveal">Booking</span>
+    <h2 class="reveal" style="max-width:13ch">Four taps and it's in the diary.</h2>
+    <p class="lead reveal" style="margin-top:1.5rem">No third-party window, no bouncing to another site. Pick, choose, confirm.</p>
+
+    <div class="book__shell reveal">
+      <ol class="steps" id="steps">
+        <li data-on>1 · Service</li><li>2 · Stylist</li><li>3 · When</li><li>4 · Confirm</li>
+      </ol>
+
+      <div class="book__pane" id="p1">
+        <p class="book__q">What are you booking?</p>
+        <div class="chips" id="whoChips">
+          <button class="chip" type="button" aria-pressed="true" data-who="all">Everything</button>
+          <button class="chip" type="button" aria-pressed="false" data-who="ladies">The salon</button>
+          <button class="chip" type="button" aria-pressed="false" data-who="mens">The barbershop</button>
+        </div>
+        <div class="opts" id="svcOpts"></div>
+      </div>
+
+      <div class="book__pane" id="p2" hidden>
+        <p class="book__q">Who with?</p>
+        <div class="opts" id="staffOpts"></div>
+      </div>
+
+      <div class="book__pane" id="p3" hidden>
+        <p class="book__q">When suits?</p>
+        <div class="days" id="days"></div>
+        <div class="times" id="times"></div>
+      </div>
+
+      <div class="book__pane" id="p4" hidden>
+        <div class="done">
+          <div class="done__tick" aria-hidden="true">✓</div>
+          <h3>That's the chair held.</h3>
+          <p class="lead" style="margin:0 auto;max-width:34ch;color:var(--paper-58)">You'd get a text and an email. Nothing to print, nothing to remember.</p>
+        </div>
+        <dl class="summary" id="sum"></dl>
+        <p class="demo-note">This is a working demonstration of the booking flow, not a live diary — no appointment has been made. Wiring it to the real diary is phase two, and needs Treatwell Connect access from the salon.</p>
+      </div>
+
+      <div class="book__foot">
+        <button class="book__back" type="button" id="back" hidden>&larr; Back</button>
+        <button class="btn" type="button" id="fwd" disabled>Choose a service</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== WORK ==================== -->
+<section id="work">
+  <div class="wrap">
+    <span class="eyebrow reveal">Recent work</span>
+    <h2 class="reveal" style="max-width:11ch">Straight off the floor.</h2>
+    <p class="lead reveal" style="margin-top:1.5rem">Every one of these walked out of the room on Perne Road.</p>
+  </div>
+
+  <div role="region" aria-roledescription="carousel" aria-label="Recent work from the salon">
+    <ul class="work__track" id="wtrack">
+      <li class="work__slide"><figure>
+        <img src="../assets/img/hkh-balayage-transformation.jpg" alt="Long wavy balayage, warm blonde blend" loading="lazy" width="604" height="846">
+        <figcaption>Balayage, grown out soft. Three and a half hours in the chair.</figcaption></figure></li>
+      <li class="work__slide"><figure>
+        <img src="../assets/img/hkh-balayage-waves.jpg" alt="Blonde balayage with long waves" loading="lazy" width="604" height="846">
+        <figcaption>Full head of highlights, finished with a wave.</figcaption></figure></li>
+      <li class="work__slide"><figure>
+        <img src="../assets/img/hkh-skin-fade.jpg" alt="Men's skin fade with beard" loading="lazy" width="470" height="375">
+        <figcaption>Skin fade and beard. Thirty minutes, £23.</figcaption></figure></li>
+      <li class="work__slide"><figure>
+        <img src="../assets/img/hkh-layered-cut.jpg" alt="Brunette layered cut with a curtain fringe" loading="lazy" width="604" height="846">
+        <figcaption>Layers and a curtain fringe, cut to fall on their own.</figcaption></figure></li>
+      <li class="work__slide"><figure>
+        <img src="../assets/img/hkh-blonde-straight.jpg" alt="Full blonde, sleek and straight" loading="lazy" width="604" height="846">
+        <figcaption>Full blonde, taken slowly. Bond treatment through the middle.</figcaption></figure></li>
+      <li class="work__slide"><figure>
+        <img src="../assets/img/hkh-balayage-blowout.jpg" alt="Brunette balayage with a bouncy blowout" loading="lazy" width="604" height="846">
+        <figcaption>Brunette balayage and a proper blowout.</figcaption></figure></li>
+    </ul>
+
+    <div class="wrap"><div class="work__ctl" id="wctl" hidden>
+      <button type="button" id="wprev" aria-controls="wtrack">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M15 18l-6-6 6-6"/></svg>
+        <span class="visually-hidden">Previous</span>
+      </button>
+      <button type="button" id="wnext" aria-controls="wtrack">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M9 18l6-6-6-6"/></svg>
+        <span class="visually-hidden">Next</span>
+      </button>
+    </div></div>
+    <p class="visually-hidden" role="status" id="wstatus"></p>
+  </div>
+</section>
+
+<!-- ==================== TEAM ==================== -->
+<section id="team">
+  <div class="wrap">
+    <span class="eyebrow reveal">Seven pairs of hands</span>
+    <h2 class="reveal" style="max-width:12ch">Pick one, or leave it to us.</h2>
+    <p class="lead reveal" style="margin-top:1.5rem">Scores are theirs, not ours — every one earned from a paying customer on Treatwell.</p>
+    <div class="team__grid reveal" id="teamGrid"></div>
+  </div>
+</section>
+
+<!-- ==================== PROOF ==================== -->
+<section class="proof" id="proof">
+  <div class="wrap">
+    <span class="eyebrow reveal">The receipts</span>
+    <h2 class="reveal" style="max-width:14ch">357 people. 4.89.</h2>
+    <p class="lead reveal" style="margin-top:1.5rem">Every one of them paid first. Treatwell only lets you leave a review if you actually sat in the chair.</p>
+
+    <dl class="stats reveal">
+      <div class="stat"><dd class="stat__value">
+        <span class="stat__num" aria-hidden="true" data-count data-count-to="4.89" data-count-decimals="2" data-count-duration="1500">4.89</span>
+        <span class="visually-hidden">4.89</span></dd>
+        <dt class="stat__label">Overall rating</dt></div>
+      <div class="stat"><dd class="stat__value">
+        <span class="stat__num" aria-hidden="true" data-count data-count-to="357" data-count-duration="1700">357</span>
+        <span class="visually-hidden">357</span></dd>
+        <dt class="stat__label">Verified reviews</dt></div>
+      <div class="stat"><dd class="stat__value">
+        <span class="stat__num" aria-hidden="true" data-count data-count-to="4.92" data-count-decimals="2" data-count-duration="1500">4.92</span>
+        <span class="visually-hidden">4.92</span></dd>
+        <dt class="stat__label">Staff score</dt></div>
+      <div class="stat"><dd class="stat__value">
+        <span class="stat__num" aria-hidden="true" data-count data-count-to="7" data-count-duration="1100">7</span>
+        <span class="visually-hidden">7</span></dd>
+        <dt class="stat__label">Days a week</dt></div>
+    </dl>
+
+    <div class="revs reveal">
+      <blockquote class="rev">
+        <div class="rev__stars" aria-label="5 out of 5">★★★★★</div>
+        <p>“I was very pleased with my perm experience. Hüseyin guided me perfectly throughout and made sure it was done in a way that wouldn't damage my hair. The result was amazing!”</p>
+        <cite class="rev__who">Idil · August 2026</cite>
+      </blockquote>
+      <blockquote class="rev">
+        <div class="rev__stars" aria-label="5 out of 5">★★★★★</div>
+        <p>“Very nice employees, the atmosphere was very clean, and they thoroughly explained what they were doing to my hair and how to keep it more moisturised.”</p>
+        <cite class="rev__who">Eylulsu · August 2026</cite>
+      </blockquote>
+      <blockquote class="rev">
+        <div class="rev__stars" aria-label="5 out of 5">★★★★★</div>
+        <p>“Marcus is an excellent practitioner.”</p>
+        <cite class="rev__who">Simon · August 2026</cite>
+      </blockquote>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== VISIT ==================== -->
+<section id="visit">
+  <div class="wrap">
+    <span class="eyebrow reveal">Visit</span>
+    <h2 class="reveal" style="max-width:11ch">Three Adkins Corner.</h2>
+    <div class="visit__grid">
+      <div class="reveal">
+        <p class="addr">
+          3 Adkins Corner, Perne Road<br>Cambridge CB1 3RU<br><br>
+          <a href="tel:01223694812">01223 694 812</a><br>
+          <a href="https://wa.me/447747205147">WhatsApp 07747 205147</a><br>
+          <a href="mailto:hkhairstudio.uk@gmail.com">hkhairstudio.uk@gmail.com</a><br><br>
+          <a href="https://maps.google.com/?q=HK+Hair+Studio,+3+Adkins+Corner,+Perne+Road,+Cambridge+CB1+3RU">Open in Maps &rarr;</a>
+        </p>
+        <p class="lead" style="margin-top:1.8rem">Five minutes from the Perne Road roundabout. Cash, credit and debit accepted in the salon.</p>
+      </div>
+      <dl class="hours reveal" id="hours"></dl>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap foot__in">
+    <span>HK Hair Studio · 3 Adkins Corner, Perne Road, Cambridge CB1 3RU</span>
+    <span><a href="https://www.instagram.com/hkhairstudio1">@hkhairstudio1</a> · Prepared by Crescendo</span>
+  </div>
+</footer>
 
 <nav class="tswitch" aria-label="Version switcher">
   <a href="../" data-tier-link title="Both options">&larr; Both</a>
@@ -53,55 +887,8 @@ footer{border-top:1px solid var(--line);padding:22px 0 30px;font-size:.78rem;col
   <a href="../compare/" data-tier-link title="Side by side">Compare<kbd>C</kbd></a>
 </nav>
 
-<main>
-  <div class="wrap">
-    <span class="kicker">Option B · £1,000</span>
-    <h1>HK Signature</h1>
-    <p class="sub">The full build. Same salon, same prices, same diary &mdash; presented like the best salon in Cambridge rather than a list of services.</p>
-
-    <div class="cols">
-      <div>
-        <h2>How it feels</h2>
-        <ul>
-          <li><b>Cinematic hero</b> — full-bleed image or video, headline revealing on load</li>
-          <li><b>Parallax depth</b> — layers moving at different speeds as you scroll</li>
-          <li><b>Scroll animation</b> — sections rising into place as you reach them</li>
-          <li><b>Page transitions</b> — a proper wipe between pages, no white flash</li>
-          <li><b>Work carousel</b> — drag through recent colour and cuts</li>
-          <li><b>Pinned services</b> — the category list holds while the menu changes beside it</li>
-          <li><b>Counting stats</b> — 357 reviews, 4.9 stars, 7 stylists</li>
-        </ul>
-      </div>
-      <div>
-        <h2>What it does</h2>
-        <ul>
-          <li><b>Booking inside the page</b> — service, stylist, date, time, confirm. No Treatwell frame.</li>
-          <li><b>Live Google reviews</b> — pulled in and rotating, always current</li>
-          <li><b>Appointment tracking</b> — what, when, who with, add to calendar, reschedule</li>
-          <li><b>Review capture</b> — happy clients routed to Google, unhappy ones to your inbox</li>
-          <li><b>Instagram feed</b> — @hkhairstudio1 flowing straight into the gallery</li>
-          <li><b>Gift vouchers</b> — sold from the site</li>
-          <li><b>Loyalty</b> — repeat customers recognised</li>
-        </ul>
-      </div>
-    </div>
-
-    <div class="note">
-      <b>This preview is in build.</b> The design is being finished now &mdash; the page you're
-      reading is a holding page, not the product. Everything listed above is scoped and
-      costed at £1,000 for the complete site.
-      <br><br>
-      Live booking data, Google API access and Treatwell integration are a second phase,
-      and depend on account access from the salon.
-    </div>
-  </div>
-</main>
-
-<footer>
-  <div class="wrap">HK Hair Studio · Prepared by Crescendo</div>
-</footer>
-
 <script src="../assets/switch.js" defer></script>
+<script src="../assets/signature.js" defer></script>
 
 </body>
 </html>
